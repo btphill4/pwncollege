@@ -35,3 +35,70 @@ ssh -i key hacker@dojo.pwn.college
 /usr/bin/rev /flag
 
 # 11
+/usr/bin/od -a /flag
+-a converts to text
+
+# 12
+/usr/bin/hd /flag
+pwn.college{8ajmsQfCpKVowIY_LOUrmYStoQl.QX0UTMscTOxUzW}
+
+# 13
+/usr/bin/xxd /flag
+pwn.college{AzE5j5xXFVo8hHuJlJCdYcFlyxg.QX1UTMscTOxUzW}
+
+# 14
+/usr/bin/base32
+convert base32 to text
+OB3W4LTDN5WGYZLHMV5WO5K7O43VG4K2JU4TO2LGJNBVIMKTPA2EO5SYKQYWOMJOKFMDEVKUJVZWGVCPPBKXUV35BI======
+https://cryptii.com/pipes/base32
+pwn.college{gu_w7SqZM97ifKCT1Sx4GvXT1g1.QX2UTMscTOxUzW}
+
+# 15
+/usr/bin/base64 /flag
+convert base634 to text
+cHduLmNvbGxlZ2V7RURBUVh5YWdUM1VFVGpwRHNKMHJRMUlBLUMxLlFYM1VUTXNjVE94VXpXfQo=
+https://www.base64decode.org/
+pwn.college{EDAQXyagT3UETjpDsJ0rQ1IA-C1.QX3UTMscTOxUzW}
+
+# 16
+/usr/bin/split /flag
+#creates a new file xaa
+cat xaa
+pwn.college{Yossxa4PPyUycBR7JRSDIT9yIqN.QX4UTMscTOxUzW}
+
+# 17
+/usr/bin/gzip -c /flag > flag.gz
+gzip -cd flag.gz
+pwn.college{Ya0w-MbSxp_fyB3qIYiEwwmsOm3.QX5UTMscTOxUzW}
+
+# 18
+/usr/bin/bzip2 -z /flag
+bzip2 -dc flag.bz2 > ~Desktop/flag.txt
+cat /Desktop/flag.txt
+pwn.college{ArlqfoXh3syrNC4TDQlvZY7WuBL.QXwYTMscTOxUzW}
+
+# 19 
+/user/bin/zip flag19.zip /flag
+unzip flag19.zip -d ~/Desktop
+cat /Desktop/flag
+pwn.college{k8WZHkM63hmEZ2Vtx9tpF8CtNLL.QXxYTMscTOxUzW}
+
+# 20
+/usr/bin/tar -cvf flag20.tar /flag
+tar - xvf flag20.tar
+cat flag20.tar
+pwn.college{4kfj7mkbH4tnqH-1lwzQvTJYK4j.QXyYTMscTOxUzW}
+
+# 21 
+/usr/bin/ar -r flag21.a /flag
+cat flag21.a 
+pwn.college{IJZhZCIeFLX6yFrPzZ5i503PaSt.QXzYTMscTOxUzW}
+
+# 22 idk
+/usr/bin/
+
+# 23 idk
+/usr/bin/genisoimage /flag
+
+# 24 idk
+/usr/bin/env 
