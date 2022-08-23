@@ -102,21 +102,41 @@ pwn.college{IJZhZCIeFLX6yFrPzZ5i503PaSt.QXzYTMscTOxUzW}
 
 # 24 idk
 /usr/bin/env 
+env cat /flag
+pwn.college{s01_sRgJAkrhTTCpxi8c_mi5b8d.QX2YTMscTOxUzW}
 
-# 25 idk
+# 25 
+/usr/bin/find
+find /flag -exec cat {} \;
+pwn.college{YIFY8KVHmHct4CSYYMPmsutMqSz.QX3YTMscTOxUzW}
 
-# 26 idk
+# 26 
+completed but forgot to mark
 
-# 27 idk
+# 27 
 /usr/bin/nice
+nice -1 cat /flag
+pwn.college{s5U-ObpVEFAOyWwIP2BDtVggqyj.QX5YTMscTOxUzW}
 
-# 28 idk
+# 28 
+/usr/bin/timeout 
+timeout -v 1 cat /flag
+pwn.college{YhXs3IFk7bUDyDLgHjaISf0T4s7.QXwcTMscTOxUzW}
 
-# 29 idk
+# 29 
+/usr/bin/stdbuf
+stdbuf -o L cat /flag
+pwn.college{QlTQpKtakdvrcqx_uFdAIxlJZXF.QXxcTMscTOxUzW}
 
 # 30 idk
+/usr/bin/setarch
+setarch x86_64 cat /flag
+pwn.college{kJxYivZrdHD8kxRL-aJ8D3aBNSx.QXycTMscTOxUzW}
 
 # 31 idk 
+/usr/bin/watch
+watch -x cat /flag
+pwn.college{Ub27bXGP5YpjRQN3A0ZolKV3G6G.QXzcTMscTOxUzW}
 
 # 32
 /usr/bin/socat
@@ -126,7 +146,8 @@ pwn.college{AI0XAzn_Gs6LKb_PXbeeCmmyHlR.QX0cTMscTOxUzW}
 
 # 33 idk
 /usr/bin/whiptail
-
+whiptail --textbox --scrolltext /flag 25 25
+pwn.college{oIPYhu8y4XdCd5tg_Z9iI6bj50B.QX1cTMscTOxUzW}
 # 34
 /usr/bin/awk
 awk '//' /flag
@@ -161,7 +182,12 @@ pwn.college{UDzrFFnrQ2NwjUc8U2RQPX1kDp1.QXwgTMscTOxUzW}
 cp /flag /dev/stdout
 pwn.college{UDzrFFnrQ2NwjUc8U2RQPX1kDp1.QXwgTMscTOxUzW}
 
-# 40 IDK
+# 40 
+/usr/bin/mv
+mv /flag flag40
+*connect to lvl 1
+cat flag40
+pwn.college{A17l4G12L3GbsC6G29ZKgf2ZS5y.QXygTMscTOxUzW}
 
 
 # 41
@@ -186,9 +212,8 @@ pwn.college{8mHCzLCehXy8zUQGI-B7-tTgQRz.QX1gTMscTOxUzW}
 
 # 44
 /usr/bin/bash
-export LFILE=/flag
-bash -c 'echo "$(<$LFILE)"'
-FILE NOT READ 
+bash -p /flag
+pwn.college{89-0jKLcyUQLAL2qAnnwtS3x_Is.QX2gTMscTOxUzW}
 
 # 45
 /usr/bin/date
