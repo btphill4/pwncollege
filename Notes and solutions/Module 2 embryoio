@@ -5,3 +5,118 @@ ssh -i key hacker@dojo.pwn.college
 
 # embryoio Module 1
 # 1
+/challenge/embryoio_level 1
+pwn.college{YPR1NIHMqsBmvFuemjYxk5_w_nE.0VMscTOxUzW}
+
+# 2
+/challenge/embryoio_level2
+pswd = ozwivqiv
+pwn.college{wy_iLaiv9B_84crGaEwqIwQ4Dsu.0lMscTOxUzW}
+
+# 3
+/challenge/embryoio_level3 whmpwzgkhn
+pwn.college{g3HSoaGhNvU6oEI8z7amkiF28Iy.01MscTOxUzW}
+
+# 4
+
+# 5
+nano /tmp/mlvbgd
+ouyqqxmk
+
+/challenge/embryoio_level5 < /tmp/mlvbgd
+pwn.college{wQaDffCYBH-sJYDPe3YIBI15XfU.0VNscTOxUzW}
+
+# 6 
+/challenge/embryoio_level6 > /tmp/xmdvkq
+cat /tmp/xmdvkq
+pwn.college{EmFX92lyaGy5Aw_bs8a3RZUK-Oz.0lNscTOxUzW}
+
+# 7
+env -i /challenge/embryoio_level7
+pwn.college{YThUXsEVFOoO_Ty3dwtbz18jKIs.01NscTOxUzW}
+
+# 8
+nano flag8script.sh
+*inside
+#!/bin/bash
+/challenge/embryoio_level8
+
+bash flag8script.sh
+pwn.college{AVPtCPnBTeWNB3y0BkJvHoJ2Y1r.0FOscTOxUzW}
+
+# 9
+nano flag9script.sh
+*inside
+#!/bin/bash
+/challenge/embryoio_level9
+
+bash flag9script.sh
+mfbozprl
+pwn.college{8wYbTvllabpKk0BryGvmb-5_0Ps.0VOscTOxUzW}
+
+#10
+dhmhedlran
+nano flag10script.sh
+*inside
+#!/bin/bash
+/challenge/embryoio_level10 dhmhedlran
+
+bash flag9script.sh
+pwn.college{ksKo9Loj7Kvrr0dG0oJjxvYuRyB.dBTMscTOxUzW}
+
+# 11 idk
+
+# 12
+nano flag12script.sh
+#in file
+#!/bin/bash
+/challenge/embryoio_level12 < /tmp/nwunqw
+
+nano /tmp/nwunqw
+#infile
+tayqexwx
+
+#run 
+bash flag12script.sh
+pwn.college{4B-q_d4jD5Rg2z5Hlo9_VZ0Wc7v.dJTMscTOxUzW}
+
+# 13
+nano flag13script.sh
+#in file
+#!/bin/bash
+/challenge/embryoio_level13 < /tmp/hpgjix
+
+#run 
+bash flag12script.sh
+cat /tmp/hpgjix
+pwn.college{AcDmpYizbk4pn9OmhAVwiFuP589.dNTMscTOxUzW}
+
+#14
+nano flag14script.sh
+#!/bin/bash
+env -i /challenge/embryoio_level14
+pwn.college{AuEF_vdJWQdV0BWohGO2jy5qZI_.dRTMscTOxUzW}
+
+#skips to 22
+nano flag22script.py
+
+#python file
+import subprocess
+out = subprocess.run("/challenge/embryoio_level22")
+print(out)
+
+python3 flag22script.py
+pwn.college{s7qGT_G2ZZ8br84YzxXo2U1nF8u.dJjMscTOxUzW}
+
+# 23
+nano flag23script.py
+
+#python file
+import subprocess
+out = subprocess.run("/challenge/embryoio_level23")
+print(out)
+
+python3 flag23script.py
+dhnmehms
+
+pwn.college{wMzPM6yBNbcwoTPfbL5IFtimQZu.dNjMscTOxUzW}
