@@ -1,0 +1,7 @@
+
+# Connect to terminal
+ssh -i key hacker@dojo.pwn.college
+
+
+# embryoio Module 1
+# 1
