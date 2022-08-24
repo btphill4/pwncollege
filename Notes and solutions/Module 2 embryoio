@@ -120,3 +120,29 @@ python3 flag23script.py
 dhnmehms
 
 pwn.college{wMzPM6yBNbcwoTPfbL5IFtimQZu.dNjMscTOxUzW}
+
+# 24
+import subprocess
+out = subprocess.run("/challenge/embryoio_level24", "vmvbecwlsj") #wrong
+print(out)
+
+python3 flag24script.py 
+
+# 25
+set env = cmlpvp:xzdikcxqtl
+
+#flag25script.py
+import os
+import subprocess
+os.environ["cmlpvp"] = "xzdikcxqtl"
+
+out = subprocess.run("/challenge/embryoio_level25")
+print(out)
+
+python3 flag25script.py
+
+pwn.college{o6QCW0r4-eZiHn-qE-l3p5qAc5S.dVjMscTOxUzW}
+
+# 26
+
+
