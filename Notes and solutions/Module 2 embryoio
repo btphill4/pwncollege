@@ -64,7 +64,13 @@ nano flag10script.sh
 bash flag9script.sh
 pwn.college{ksKo9Loj7Kvrr0dG0oJjxvYuRyB.dBTMscTOxUzW}
 
-# 11 idk
+# 11 
+#!/bin/bash
+mhgott=kqfmoczozh /challenge/embryoio*      
+
+bash flag11bash.sh
+pwn.college{sbzu6PrEv5SjEyyp8i5fgvow4EB.dFTMscTOxUzW}
+
 
 # 12
 nano flag12script.sh
