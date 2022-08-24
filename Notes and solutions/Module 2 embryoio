@@ -144,5 +144,27 @@ python3 flag25script.py
 pwn.college{o6QCW0r4-eZiHn-qE-l3p5qAc5S.dVjMscTOxUzW}
 
 # 26
+#flag26script.py
+import os
+import subprocess
+#os.environ["cmlpvp"] = "xzdikcxqtl"
 
+out = subprocess.run("/challenge/embryoio_level26")
+print(out)
 
+python3 flag26script.py > /tmp/ylqtru < yvbpcapq
+
+pwn.college{o6QCW0r4-eZiHn-qE-l3p5qAc5S.dVjMscTOxUzW}
+
+# 27 redirect to /tmp/nxmhkh
+#flag27script.py
+import os
+import subprocess
+#os.environ["cmlpvp"] = "xzdikcxqtl"
+
+out = subprocess.run("/challenge/embryoio_level27")
+print(out)
+
+python3 flag27script.py > /tmp/nxmhkh
+
+pwn.college{EPbBr7fQaBkwY7uiLwNl_SwCd4u.ddjMscTOxUzW}
