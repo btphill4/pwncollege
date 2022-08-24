@@ -168,3 +168,17 @@ print(out)
 python3 flag27script.py > /tmp/nxmhkh
 
 pwn.college{EPbBr7fQaBkwY7uiLwNl_SwCd4u.ddjMscTOxUzW}
+
+# 28 empty enviroment in python3
+#flag28script.py
+import os
+import subprocess
+del os.environ
+
+out = subprocess.run("/challenge/embryoio_level28")
+print(out)
+
+exec -c python3 flag28script.py 
+pwn.college{8geNToEPLNl6HXqrXa604QDvaSE.dhjMscTOxUzW}
+
+# 29
