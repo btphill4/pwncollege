@@ -127,10 +127,16 @@ dhnmehms
 
 pwn.college{wMzPM6yBNbcwoTPfbL5IFtimQZu.dNjMscTOxUzW}
 
-# 24
+# 24 IDK
 import subprocess
-out = subprocess.run("/challenge/embryoio_level24", "vmvbecwlsj") #wrong
-print(out)
+import pwn
+import glob
+
+p = pwn.process(glob.glob("/challenge/embry*") + [ "vmvbecwlsj" ], stdout=pwn.PIPE, stdin=pwn.PIPE)
+print(p.read().decode())
+#out = subprocess.run("/challenge/embryoio_level24", "vmvbecwlsj")
+pwn.college{cxNngFQGI_0NXbNhNuafyXZuErI.dRjMscTOxUzW}
+
 
 python3 flag24script.py 
 
@@ -149,18 +155,22 @@ python3 flag25script.py
 
 pwn.college{o6QCW0r4-eZiHn-qE-l3p5qAc5S.dVjMscTOxUzW}
 
-# 26
+# 26 IDK
 #flag26script.py
 import os
 import subprocess
-#os.environ["cmlpvp"] = "xzdikcxqtl"
-
 out = subprocess.run("/challenge/embryoio_level26")
 print(out)
 
+#to try
+import glob
+import pwn
+p = pwn.process(glob.glob("/challenge/embryoio*"), stdout=pwn.PIPE stdin=pwn.PIPE)
+p.sendline("yvbpcapq")
+print(p.read().decode())
 python3 flag26script.py > /tmp/ylqtru < yvbpcapq
 
-pwn.college{o6QCW0r4-eZiHn-qE-l3p5qAc5S.dVjMscTOxUzW}
+
 
 # 27 redirect to /tmp/nxmhkh
 #flag27script.py
