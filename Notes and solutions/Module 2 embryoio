@@ -322,6 +322,19 @@ touch rcztdf
 /challenge/$HOSTNAME < rcztdf
 pwn.college{YLM4znX11bj-NX8o7QRdS_1-Z-4.dJzNscTOxUzW}
 
+# 73
+#bash file
+#!/bin/bash
+
+mkdir /tmp/gjjuyu
+cd /tmp/gjjuyu
+
+/challenge/$HOSTNAME &
+
+cd /
+sleep 1
+pwn.college{EavOVu3gvgAkBdeRjAe3oZo0Bfm.dNzNscTOxUzW}
+
 
 #102
 #!/usr/bin/python3
