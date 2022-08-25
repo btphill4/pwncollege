@@ -224,8 +224,28 @@ int main(int argc, char **argv)
 }
 
 #run 
-gcc -o outName filename.c 
-./outName
-pwn.college{cerMCOSxRy1DMneKoREuf7pTP-D.dljMscTOxUzW}
+gcc -o flag29 flag29.c 
+./flag29
+pwn.college{cerMCOSxRy1DMneKoREuf7pcTP-D.dljMscTOxUzW}
 
 # 30
+#c file
+int pwncollege()
+{
+}
+
+int main(int argc, char **argv)
+{
+
+	int i = fork();
+	if(i == 0)
+	{
+		execve("/challenge/embryoio_level30", NULL, NULL);
+	}
+	else
+	{
+		waitpid(i, NULL, 0);
+	}
+}
+
+pwn.college{YmoJaj70WOK0gfsBXr4R65bOrnq.dBzMscTOxUzW}
