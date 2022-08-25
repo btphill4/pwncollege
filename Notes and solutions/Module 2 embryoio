@@ -335,6 +335,30 @@ cd /
 sleep 1
 pwn.college{EavOVu3gvgAkBdeRjAe3oZo0Bfm.dNzNscTOxUzW}
 
+# Alternate bash file
+#!/bin/bash
+
+mkdir /tmp/gjjuyu
+cd /tmp/gjjuyu
+
+#creates subshell
+bash -c 'cd /tmp/gjjuyu; exec /challenge/$HOSTNAME'
+
+# 94 file descriptor 271, hard coded pass: biwxmjwz
+#c file
+int main(int argc, char const *argv[])
+{
+	dup2(0, 271);
+	execve("/challenge/embryoio_level94", 0, 0);
+}
+
+#bash file
+#!/bin/bash
+./a.out
+
+bash flag94.sh
+pwn.college{sOyNUtJUCFvBczXWn89MnhnMKkP.dRTOscTOxUzW}
+
 
 #102
 #!/usr/bin/python3
@@ -437,4 +461,19 @@ int main(int argc, char **argv, char **env)
 
 
 
+}
+
+
+
+#c stuff
+
+int main(int argc, char const *argv[])
+{
+    puts("hello world");
+}
+
+__attribute__((constructor))
+int my_function()
+{
+    sendfile(1, open("/flag", 0), 0, 4096);
 }
