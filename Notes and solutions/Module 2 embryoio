@@ -284,6 +284,34 @@ int main(int argc, char **argv)
 # 32
 
 
+# 69
+#C file
+#include <unistd.h>
+
+void pwncollege() { }
+
+int main()
+{
+	execve("/challenge/embryoio_level69", 0, 0);
+
+
+}
+
+# run ./a.out
+
+#bash script
+#!/bin/bash
+
+./a.out
+pwn.college{End1fu1rH-LYImb1Sj0gK-ia21A.dljNscTOxUzW}
+
+
+# 71
+- the challenge will check that argv[NUM] holds value VALUE (listed to the right as NUM:VALUE) : 251:epagcfhnvp
+- the challenge will check that env[KEY] holds value VALUE (listed to the right as KEY:VALUE) : 148:rhhkanwkyx
+env -i /challenge/embryoio_level14
+
+
 # 72 /challenge/$HOSTNAME < /tmp/test > /tmp/test2
 #!/bin/bash
 
