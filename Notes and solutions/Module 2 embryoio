@@ -127,18 +127,17 @@ dhnmehms
 
 pwn.college{wMzPM6yBNbcwoTPfbL5IFtimQZu.dNjMscTOxUzW}
 
-# 24 IDK
+# 24 
+#flag24script.py
 import subprocess
 import pwn
 import glob
-
 p = pwn.process(glob.glob("/challenge/embry*") + [ "vmvbecwlsj" ], stdout=pwn.PIPE, stdin=pwn.PIPE)
 print(p.read().decode())
 #out = subprocess.run("/challenge/embryoio_level24", "vmvbecwlsj")
-pwn.college{cxNngFQGI_0NXbNhNuafyXZuErI.dRjMscTOxUzW}
-
 
 python3 flag24script.py 
+pwn.college{cxNngFQGI_0NXbNhNuafyXZuErI.dRjMscTOxUzW}
 
 # 25
 set env = cmlpvp:xzdikcxqtl
@@ -150,7 +149,11 @@ os.environ["cmlpvp"] = "xzdikcxqtl"
 
 out = subprocess.run("/challenge/embryoio_level25")
 print(out)
-
+#other python file
+import pwn
+import glob
+p = pwn.process(glob.glob("/challenge/emb*"), env={"ENVNAME : VALUE"})
+print(p.read().decode())
 python3 flag25script.py
 
 pwn.college{o6QCW0r4-eZiHn-qE-l3p5qAc5S.dVjMscTOxUzW}
@@ -198,3 +201,31 @@ exec -c python3 flag28script.py
 pwn.college{8geNToEPLNl6HXqrXa604QDvaSE.dhjMscTOxUzW}
 
 # 29
+#cfile
+#include <unistd.h>
+#include <sys/wait.h>
+
+int pwncollege()
+{
+}
+
+int main(int argc, char **argv)
+{
+
+	int i = fork();
+	if(i == 0)
+	{
+		execve("/challenge/embryoio_level29", NULL, NULL);
+	}
+	else
+	{
+		waitpid(i, NULL, 0);
+	}
+}
+
+#run 
+gcc -o outName filename.c 
+./outName
+pwn.college{cerMCOSxRy1DMneKoREuf7pTP-D.dljMscTOxUzW}
+
+# 30
