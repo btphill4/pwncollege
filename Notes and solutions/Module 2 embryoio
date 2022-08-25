@@ -249,3 +249,151 @@ int main(int argc, char **argv)
 }
 
 pwn.college{YmoJaj70WOK0gfsBXr4R65bOrnq.dBzMscTOxUzW}
+
+# 31
+#include <unistd.h>
+#include <sys/wait.h>
+#include <stdlib.h>
+#include <stdio.h>
+int pwncollege()
+{
+}
+
+int main(int argc, char **argv)
+{
+
+	for (int j = 0; j < argc; j++)
+	{
+		printf("argv[%d]: %s\n", j, argv[j]);
+	}
+
+	int i = fork();
+	if(i == 0)
+	{
+		char *argv[1]= { "bftcolmenv" };
+		//*argvv[0] = "bftcolmenv";
+		execve("/challenge/embryoio_level31", argv[1], NULL);
+	}
+	else
+	{
+		waitpid(i, NULL, 0);
+	}
+//printf("%s", "hello world");
+}
+
+# 32
+
+
+# 72 /challenge/$HOSTNAME < /tmp/test > /tmp/test2
+#!/bin/bash
+
+mkdir /tmp/trebbk
+cd /tmp/trebbk
+touch rcztdf
+
+/challenge/$HOSTNAME < rcztdf
+pwn.college{YLM4znX11bj-NX8o7QRdS_1-Z-4.dJzNscTOxUzW}
+
+
+#102
+#!/usr/bin/python3
+import subprocess
+ctf = "/challenge/embryoio_level102"
+argv0 = "whatever you want"
+p1 = subprocess.Popen([argv0], execuatable = ctf)
+p1.wait()
+
+#FIFO PROBLEM
+from pwn import *
+fd_w = os.open("fifo", os.O_RDWR)
+fd_r = os.open("fifo", os.O_RDWR)
+
+with process("cat", stdin=fd_r) as
+proc: 
+    with open(fd_w, "w") as 
+fifo_w:
+    fifo_w.write("some text\n")
+    proc.interactive()
+
+# 142
+#c program 1
+#include <unistd.h>
+#include <stdio.h>
+#include <stddef.h>
+
+int main(int argc, char **argv, char **env)
+{
+        printf("The program is: %s\n", argv[0]);
+        execl("/bin/ls", "/bin/ls", "/", NULL);
+}
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stddef.h>
+
+
+
+int main(int argc, char **argv, char **env)
+{
+	printf("The program is: %s\n", argv[0]);
+	int the_pipe[2];
+	pipe(the_pipe);
+
+	int fork_ret = fork();
+	if(fork_ret)
+	{
+		printf("Parent here! \n");
+	}
+	else
+	{
+		close(the_pipe[0]);		
+		dup2(the_pipe[1], 1);
+		printf("Child checking in! /n");
+		execl("/bin/ls", "/bin/ls", "/", NULL);
+	}
+	printf("Yay! \n");
+	waitpid(fork_ret, NULL, 0);
+	//execl("/bin/ls", "/bin/ls", "/", NULL);
+	char buf[1024];
+	printf("CHILD SAID:\n");
+	read (the_pipe[0], buf, 1024);
+	puts(buf);
+
+
+
+}
+# c program 2 Network
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stddef.h>
+
+int main(int argc, char **argv, char **env)
+{
+	printf("The program is: %s\n", argv[0]);
+	int the_pipe[2];
+	pipe(the_pipe);
+
+	int fork_ret = fork();
+	if(fork_ret)
+	{
+		printf("Parent here! \n");
+	}
+	else
+	{
+		close(the_pipe[0]);		
+		dup2(the_pipe[1], 1);
+		printf("Child checking in! /n");
+		execl("/bin/ls", "/bin/ls", "/", NULL);
+	}
+	printf("Yay! \n");
+	waitpid(fork_ret, NULL, 0);
+	//execl("/bin/ls", "/bin/ls", "/", NULL);
+	char buf[1024];
+	printf("CHILD SAID:\n");
+	read (the_pipe[0], buf, 1024);
+	puts(buf);
+
+
+
+}
