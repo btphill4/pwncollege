@@ -446,6 +446,66 @@ fifo_w:
     fifo_w.write("some text\n")
     proc.interactive()
 
+
+# 106 
+from pwn import *
+import os
+
+fifo_stdin = "/tmp/fifo_stdin"
+fifo_stdout = "/tmp/fifo_stdout"
+
+try:
+    os.remove(fifo_stdin)
+    os.remove(fifo_stdout)
+except:
+    pass
+
+os.mkfifo(fifo_stdin, mode=0o777)
+os.mkfifo(fifo_stdout, mode=0o777)
+
+stdin_read = os.open(fifo_stdin, os.O_RDWR)
+stdin_write = os.open(fifo_stdin, os.O_WRONLY)
+stdout_read = os.open(fifo_stdout, os.O_RDWR)
+stdout_write = os.open(fifo_stdout, os.O_WRONLY)
+
+p_stdin = process(["cat", "-"], stdout=stdin_write)
+p_stdout = process(["cat", "-"], stdin=stdout_read)
+p = process("/challenge/embryoio_level106", stdin=stdin_read, stdout=stdout_write)
+
+print(p_stdout.recv().decode("utf-8"))
+p_stdin.sendline(b"100")
+print(p_stdout.recv().decode("utf-8"))
+
+
+
+os.close(stdin_read)
+os.close(stdin_write)
+os.close(stdout_read)
+os.close(stdout_write)
+
+from pwn import *
+
+p = process([/challenge/embryoio_level126])
+for i in range (500):
+	output = p.recvuntil(b"CHALLENGE! Please send the solution for: ", timeout=1)
+
+	if b"CHALLENGE" not in output:
+		print(output.decode("utf-8"))
+
+	#[:-1] = everything except last character
+	equation = p.recvuntil(b"\n")[:-1]
+
+	answer = eval(equation)	
+	print(f"SOLVED #{i}: {equation.decode('utf-8')[:50]}... = {answer}")
+	print(f"ANSWER: {answer}")
+	p.sendline(bytes(str(answer), 'utf-8'))
+	p.recvuntil(b"CORRECT!")
+
+print(p.recvall(timeout=2).decode('utf-8'))
+
+
+
+
 # 116 ALMOST DONE
 #include <stddef.h>
 #include <unistd.h>
@@ -531,6 +591,27 @@ int main(int argc, char** argv)
 ./a.out
 pwn.college{cKbgkd96utmzacpYROAcaui9C_h.QXwITMscTOxUzW}
 
+# 126
+from pwn import *
+
+p = process([/challenge/embryoio_level126])
+for i in range (500):
+	output = p.recvuntil(b"CHALLENGE! Please send the solution for: ", timeout=1)
+
+	if b"CHALLENGE" not in output:
+		print(output.decode("utf-8"))
+
+	#[:-1] = everything except last character
+	equation = p.recvuntil(b"\n")[:-1]
+
+	answer = eval(equation)	
+	print(f"SOLVED #{i}: {equation.decode('utf-8')[:50]}... = {answer}")
+	print(f"ANSWER: {answer}")
+	p.sendline(bytes(str(answer), 'utf-8'))
+	p.recvuntil(b"CORRECT!")
+
+print(p.recvall(timeout=2).decode('utf-8'))
+pwn.college{Mv1Y8RYrwivXaZ0BRUcFE2b0_ps.QX2ITMscTOxUzW}
 
 
 # 142
