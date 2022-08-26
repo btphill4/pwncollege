@@ -274,6 +274,11 @@ pwn.college{YmoJaj70WOK0gfsBXr4R65bOrnq.dBzMscTOxUzW}
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stddef.h>
 int pwncollege()
 {
 }
@@ -281,24 +286,75 @@ int pwncollege()
 int main(int argc, char **argv)
 {
 
-	for (int j = 0; j < argc; j++)
+
+
+	char *pathname = "/tmp/my_file";
+        int my_file_fd = open(pathname, O_RDONLY);
+
+        printf("my_file fd: %d\n", my_file_fd);
+
+        int my_duped_fd = 0;
+        dup2(my_file_fd, 177);
+
+        printf("my_duped_fd %d\n", my_duped_fd);
+        pid_t pid = fork();
+        if(pid == 0)
+        {
+                //in child
+                //still running in our c program, want to run challenge
+
+                //setting execve variables
+                //char *pathname = "/challenge/embryoio_level120";
+                char *newargv[] = {"/challenge/embryoio_level31", "bftcolmenv", NULL};
+                char *newenvp[] = { NULL };
+                //execute new binary
+                execve("/challenge/embryoio_level31", newargv, newenvp);
+
+        }
+        else
+        {
+                int status = 0;
+                //in parent
+                waitpid(pid, &status, 0);
+        }
+        return 0;
+
+/*	for (int j = 0; j < argc; j++)
 	{
 		printf("argv[%d]: %s\n", j, argv[j]);
 	}
 
-	int i = fork();
+
+	FILE *fp;
+	string c;
+	fp = freopen("flag31argv", "r");
+	while(1) {
+	c = fgetc(fp);
+	if(feof(fp) )
+	{
+		break;
+	}
+	execl("/challenge/embryoio_level31", c);
+	fclose(fp);
+	return 0;
+	} */
+/*	int i = fork();
 	if(i == 0)
 	{
 		char *argv[1]= { "bftcolmenv" };
 		//*argvv[0] = "bftcolmenv";
-		execve("/challenge/embryoio_level31", argv[1], NULL);
+		execl("/challenge/embryoio_level31", "bftcolmenv", NULL);
+		//execve("/challenge/embryoio_level31", argv[1], NULL);
 	}
 	else
 	{
 		waitpid(i, NULL, 0);
-	}
+	}*/
 //printf("%s", "hello world");
 }
+pwn.college{EEzF0HSE5H8YufOHbVmfFTULMx_.dFzMscTOxUzW}
+
+
 
 # 32
 
