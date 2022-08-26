@@ -158,8 +158,24 @@ python3 flag25script.py
 
 pwn.college{o6QCW0r4-eZiHn-qE-l3p5qAc5S.dVjMscTOxUzW}
 
-# 26 IDK
+# 26 
+nano /tmp/ylqtru
+yvbpcapq
+
 #flag26script.py
+import os
+import sys
+import subprocess 
+from subprocess import Popen, PIPE, STDOUT
+import pwn
+import glob
+
+from pwn import *
+import os
+p = process("/challenge/embryoio_level26", stdin=os.open("/tmp/ylqtru", os.O_RDWR))
+p.interactive()
+
+pwn.college{gGH3ik2p7LkynZk-xNIkrWxwYEA.dZjMscTOxUzW}
 
 
 from pwn import *
