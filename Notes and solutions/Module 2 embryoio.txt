@@ -160,10 +160,13 @@ pwn.college{o6QCW0r4-eZiHn-qE-l3p5qAc5S.dVjMscTOxUzW}
 
 # 26 IDK
 #flag26script.py
+
+
+from pwn import *
 import os
-import subprocess
-out = subprocess.run("/challenge/embryoio_level26")
-print(out)
+p = process("/challenge/embryoio_level26", stdin=os.open("/tmp/wtybrt, os.O_RDWR"))
+p.interactive()
+
 
 #to try
 import glob
@@ -283,6 +286,51 @@ int main(int argc, char **argv)
 
 # 32
 
+# 33 run with c program
+#include <stddef.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdio.h>
+
+void pwncollege()
+{
+        //do stuff
+        int challenge_pid = fork();
+        if (challenge_pid == 0)
+        {
+                //executing challenge
+                char* argv[] = { NULL };
+                char* envp[] = { NULL };
+//                int pipein_fd = open("/home/hacker/pin", O_RDWR);
+//              printf("fd: %d/n", pipein_fd);
+		int fd = open("/tmp/ftsipf", O_RDWR);
+		dup2(fd, STDIN_FILENO);
+		//like doing 
+		//challenge/embryoio)level33 < path
+//                dupe2(pipein_fd, STDIN_FILENO);
+
+                execve("/challenge/embryoio_level33", argv, envp);
+        }
+        else
+        {
+        //      dupe2(pipe_indf, STDIN_FILENO);
+                waitpid(challenge_pid, NULL, 0);
+        }
+
+}
+
+int main()
+{
+        pwncollege();
+
+}
+pwn.college{cm7FavoOMMRqDM1_2abfOy4NrAc.dNzMscTOxUzW}
+
+
+# 54
+
 
 # 69
 #C file
@@ -381,6 +429,46 @@ proc:
 fifo_w:
     fifo_w.write("some text\n")
     proc.interactive()
+
+# 116 ALMOST DONE
+#include <stddef.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <stdio.h>
+
+void pwncollege()
+{
+        //do stuff
+        int challenge_pid = fork();
+        if (challenge_pid == 0)
+        {
+                //executing challenge
+                char* argv[] = { NULL };
+                char* envp[] = { NULL };
+                int pipein_fd = open("/home/hacker/pin", O_RDWR);
+//              printf("fd: %d/n", pipein_fd);
+
+                dupe2(pipein_fd, STDIN_FILENO);
+
+                execve("/challenge/embryoio_level116", argv, envp);
+        }
+        else
+        {
+        //      dupe2(pipe_indf, STDIN_FILENO);
+                waitpid(challenge_pid, NULL, 0);
+        }
+
+}
+
+int main()
+{
+        pwncollege();
+
+}
+
+
 
 # 120
 #include <sys/types.h>
@@ -525,4 +613,35 @@ __attribute__((constructor))
 int my_function()
 {
     sendfile(1, open("/flag", 0), 0, 4096);
+}
+
+
+
+
+
+# base c file
+#include <stddef.h>
+
+void pwncollege()
+{
+        //do stuff
+        int challenge_pid = fork();
+        if (challenge_pid == 0)
+        {
+                //executing challenge
+                char* argv[] = { NULL };
+                char* envp[] = { NULL };
+                execve("/challenge/embryoio_level116", argv, envp);
+        }
+        else
+        {
+        waitpid(challenge_pid, NULL, 0);
+        }
+
+}
+
+int main()
+{
+        pwncollege();
+
 }
