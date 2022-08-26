@@ -544,6 +544,10 @@ int main()
 
 }
 
+# new terminal 
+echo qzeezrmv > pin
+
+pwn.college{sJbNOYIm6aBOtNFowkAjQvnCEOv.QX2ETMscTOxUzW}
 
 
 # 120
