@@ -1,0 +1,19 @@
+#!/usr/bin/python3
+import os
+import signal
+from pwn import *
+#from subprocess import *
+
+i=process("cat",stdout=PIPE)
+o=process("cat",stdin=PIPE)
+process("/challenge/embryoio_level134",stdin=i.stdout,stdout=o.stdin)
+
+print(o.recvuntil(b"Please send the solution for: ").decode("utf-8"))
+
+x=o.recvuntil(b"\n").decode("utf-8").strip()
+print("MATH: "+x)
+x=str(eval(x))
+print("SOLUTION: "+x)
+
+i.sendline(x.encode("utf-8"))
+print(o.recv().decode("utf-8"))
