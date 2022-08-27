@@ -549,7 +549,55 @@ int main()
 env -i ./a.out
 pwn.college{8FqBeggwz7Rpdgm_4EU23G-juqT.dVzMscTOxUzW}
 
+# 36 IDK
+
+# 37
+
+
 # 54
+
+# 60
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stddef.h>
+#include <stdio.h>
+
+int pwncollege()
+{
+}
+
+int main(int argc, char **argv)
+{
+	int i = fork();
+	if(i == 0)
+	{
+		int pipe_fds[2];
+		pipe(pipe_fds);
+		
+		int j = fork();
+		if(j != 0)
+		{
+			dup2(pipe_fds[1], 1);
+			close(pipe_fds[0]);
+			execve("/challenge/embryoio_level60", NULL, NULL);
+		}
+		else
+		{
+			dup2(pipe_fds[0], 0);
+			close(pipe_fds[1]);
+			execl("/usr/bin/cat", "/usr/bin/cat", NULL);
+		}
+	}
+	else
+	{
+	waitpid(i, NULL, 0);
+	}
+
+
+}
+
+./a.out
+pwn.college{oqIi-pOVXFogXlcvDmM8V9kIiUU.dBjNscTOxUzW}
 
 
 # 69
