@@ -678,6 +678,33 @@ biwxmjwz
 pwn.college{sOyNUtJUCFvBczXWn89MnhnMKkP.dRTOscTOxUzW}
 
 
+# 75
+#python
+import subprocess
+
+print("start")
+subprocess.call("./a.out")
+print( "end")
+
+#c file
+import subprocess
+
+print("start")
+subprocess.call("./a.out")
+print( "end")
+hacker@embryoio_level75:~$ cat flag75.c
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stddef.h>
+#include <stdio.h>
+int main(int argc, char **argv)
+{
+
+execve("/challenge/embryoio_level75", NULL, NULL);
+}
+
+
+
 #102
 #!/usr/bin/python3
 import subprocess
