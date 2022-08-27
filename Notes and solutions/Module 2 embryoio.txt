@@ -518,6 +518,36 @@ ONWARDS TO GREATNESS!
 [FAIL] Specifically, you must fix the following issue:
 [FAIL]    The process must be your own program in your own home directory.
 
+# 35
+#include <stddef.h>
+
+void pwncollege()
+{
+        //do stuff
+        int challenge_pid = fork();
+        if (challenge_pid == 0)
+        {
+                //executing challenge
+                char* argv[] = { NULL };
+                char* envp[] = { NULL };
+                execve("/challenge/embryoio_level35", argv, envp);
+        }
+        else
+        {
+        waitpid(challenge_pid, NULL, 0);
+        }
+
+}
+
+int main()
+{
+        pwncollege();
+
+}
+
+# bash file
+env -i ./a.out
+pwn.college{8FqBeggwz7Rpdgm_4EU23G-juqT.dVzMscTOxUzW}
 
 # 54
 
