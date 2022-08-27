@@ -783,8 +783,17 @@ for i in range (500):
 	p.recvuntil(b"CORRECT!")
 
 print(p.recvall(timeout=2).decode('utf-8'))
+/
 
+# 97
+hacker@embryoio_level97:~$ cat flag91.sh
+#!/bin/bash
 
+/challenge/embryoio_level97
+
+#kill -s ABRT 918
+
+pwn.college{EzAfM4K2M7L-MoZxOJXSFiahC3f.ddTOscTOxUzW}
 
 
 # 116 
