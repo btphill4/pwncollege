@@ -703,6 +703,8 @@ int main(int argc, char **argv)
 execve("/challenge/embryoio_level75", NULL, NULL);
 }
 
+pwn.college{sO_z2t_LCHIZzlNb8du-8tSwHXJ.dVzNscTOxUzW}
+
 
 
 #102
