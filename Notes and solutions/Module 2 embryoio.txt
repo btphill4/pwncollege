@@ -568,8 +568,20 @@ khwlyvnr
 pwn.college{I-JB28Nf-RxDgENnIb0Z0zE_pug.dBDNscTOxUzW}
 
 #42
+#bash file
+#!/bin/bash
+/challenge/$HOSTNAME | cat
 
+bash flag42.sh
+pwn.college{E_6DyJsCBTBe5xt-ErJdllw2DgK.dJDNscTOxUzW}
 
+# 44
+# bash 
+#!/bin/bash
+
+/challenge/$HOSTNAME | sed /challenge/$HOSTNAME
+
+pwn.college{4UzK6qk3oyAMF2tnCWnGJZl-f2o.dRDNscTOxUzW}
 
 # 54
 
