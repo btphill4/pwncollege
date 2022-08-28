@@ -549,9 +549,16 @@ int main()
 env -i ./a.out
 pwn.college{8FqBeggwz7Rpdgm_4EU23G-juqT.dVzMscTOxUzW}
 
-# 36 IDK
+# 36 
+
+/embryoio_level36 | cat
+pwn.college{oBxABSiCWYep52EB3bxeBOwRjUW.dZzMscTOxUzW}
+
 
 # 37
+/challenge/embryoio_level37 | grep "pwn"
+pwn.college{oG6qzJNjl1jXQa_ho-2Y8e2ZEZ8.ddzMscTOxUzW}
+
 
 
 # 40 
