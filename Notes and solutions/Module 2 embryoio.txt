@@ -583,6 +583,18 @@ pwn.college{E_6DyJsCBTBe5xt-ErJdllw2DgK.dJDNscTOxUzW}
 
 pwn.college{4UzK6qk3oyAMF2tnCWnGJZl-f2o.dRDNscTOxUzW}
 
+# 47
+#bash file
+#!/bin/bash
+rev | /challenge/embryoio_level47
+
+bash flag47.sh
+jykeviqt
+ctrl + D
+pwn.college{oMW-msjr08g4gUzTvXmsNQN3bar.ddDNscTOxUzW}
+
+
+
 # 54
 
 # 60
