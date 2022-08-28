@@ -596,6 +596,27 @@ pwn.college{oMW-msjr08g4gUzTvXmsNQN3bar.ddDNscTOxUzW}
 
 
 # 54
+#python file
+#python
+import subprocess
+
+print("start")
+subprocess.call("/challenge/embryoio_level54")
+print( "end")
+
+python3 flag54.py | cat
+pwn.college{gy-fpWoLwKl_z4T5qiYOXuqpkFN.dRTNscTOxUzW}
+
+# 56
+#python file
+import subprocess
+
+print("start")
+subprocess.call("/challenge/embryoio_level56")
+print( "end")
+
+python3 flag56.py | sed /challenge/embryoio_level56
+pwn.college{kJU8X8Vl8AbOziTTlGpWieU_A85.dZTNscTOxUzW}
 
 # 60
 #include <sys/wait.h>
