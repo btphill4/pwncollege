@@ -554,6 +554,16 @@ pwn.college{8FqBeggwz7Rpdgm_4EU23G-juqT.dVzMscTOxUzW}
 # 37
 
 
+# 40 
+cat | /challenge/embryoio_level40
+khwlyvnr
+
+pwn.college{I-JB28Nf-RxDgENnIb0Z0zE_pug.dBDNscTOxUzW}
+
+#42
+
+
+
 # 54
 
 # 60
