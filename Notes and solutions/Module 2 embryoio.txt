@@ -627,6 +627,8 @@ subprocess.call("/challenge/embryoio_level58")
 print( "end")
 
 cat | python3 flag58.py
+pwn.college{Mmk6VH2eX2IN1hfFgKHo4G7J-0R.dhTNscTOxUzW}
+
 # 60
 #include <sys/wait.h>
 #include <unistd.h>
