@@ -618,6 +618,15 @@ print( "end")
 python3 flag56.py | sed /challenge/embryoio_level56
 pwn.college{kJU8X8Vl8AbOziTTlGpWieU_A85.dZTNscTOxUzW}
 
+# 58
+#python file
+import subprocess
+
+print("start")
+subprocess.call("/challenge/embryoio_level58")
+print( "end")
+
+cat | python3 flag58.py
 # 60
 #include <sys/wait.h>
 #include <unistd.h>
