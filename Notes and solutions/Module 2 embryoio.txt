@@ -886,6 +886,18 @@ print(p.recvall(timeout=2).decode('utf-8'))
 
 pwn.college{UcsCWajmNtG8Iy88HaDOGjsoI70.ddzNscTOxUzW}
 
+# flag 79
+import os
+from pwn import *
+#os.chdir("/tmp/mqrkmh")
+
+p = process(['/challenge/embryoio_level79'], cwd="/tmp/mqrkmh")
+
+print(p.recvall(timeout=2).decode('utf-8'))
+
+pwn.college{IDRsQCNtNAuU13uh6pcriyIk5Mc.dlzNscTOxUzW}
+
+
 # 94 file descriptor 271, hard coded pass: biwxmjwz
 #c file
 int main(int argc, char const *argv[])
