@@ -672,6 +672,94 @@ int main(int argc, char **argv)
 ./a.out
 pwn.college{oqIi-pOVXFogXlcvDmM8V9kIiUU.dBjNscTOxUzW}
 
+# 61 
+# c file
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stddef.h>
+#include <stdio.h>
+
+int pwncollege()
+{
+}
+
+int main(int argc, char **argv)
+{
+	int i = fork();
+	if(i == 0)
+	{
+		int pipe_fds[2];
+		pipe(pipe_fds);
+		
+		int j = fork();
+		if(j != 0)
+		{
+			dup2(pipe_fds[1], 1);
+			close(pipe_fds[0]);
+			execve("/challenge/embryoio_level61", NULL, NULL);
+		}
+		else
+		{
+			dup2(pipe_fds[0], 0);
+			close(pipe_fds[1]);
+			execl("/usr/bin/grep", "/usr/bin/grep", "pwn", NULL);
+		}
+	}
+	else
+	{
+	waitpid(i, NULL, 0);
+	}
+
+}
+
+gcc flag61.c
+./a.out
+pwn.college{kIbh9GODTwr5o0izwMiaUHErFwO.dFjNscTOxUzW}
+
+# 65
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stddef.h>
+#include <stdio.h>
+
+int pwncollege()
+{
+}
+
+int main(int argc, char **argv)
+{
+	int i = fork();
+	if(i == 0)
+	{
+		int pipe_fds[2];
+		pipe(pipe_fds);
+		
+		int j = fork();
+		if(j != 0)
+		{	
+			dup2(pipe_fds[1], 1);
+			close(pipe_fds[0]);
+			execve("/challenge/embryoio_level65", NULL, NULL);
+			
+		}
+		else
+		{
+			dup2(pipe_fds[0], 0);
+			close(pipe_fds[1]);
+			execl("/usr/bin/rev", "/usr/bin/rev", NULL);
+		}
+	}
+	else
+	{
+	waitpid(i, NULL, 0);
+	}
+
+}
+
+gcc flag65.c
+rev | ./a.out
+wwwejfen
+pwn.college{0ogSb5yWToZD59I057KVjRheFjW.dVjNscTOxUzW}
 
 # 69
 #C file
