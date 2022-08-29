@@ -934,6 +934,42 @@ int main()
 
 pwn.college{E1EeRDFRHTHB7LpT_oZoPRHlQTP.dBDOscTOxUzW}
 
+# 81
+#c file
+#include <stddef.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stddef.h>
+
+void pwncollege()
+{
+        //do stuff
+        int challenge_pid = fork();
+        if (challenge_pid == 0)
+        {
+		//
+                //executing challenge
+                char* argv[] = { NULL };
+                char* envp[] = { NULL };
+                execve("/challenge/embryoio_level81", argv, envp);
+        }
+        else
+        {
+        waitpid(challenge_pid, NULL, 0);
+        }
+
+}
+
+int main()
+{
+        pwncollege();
+
+}
+
+
+pwn.college{QmRRrQFQHf91AT3rLZpx4fEJJXA.dFDOscTOxUzW}
+
 
 
 # 94 file descriptor 271, hard coded pass: biwxmjwz
