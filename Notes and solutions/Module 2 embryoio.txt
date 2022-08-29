@@ -897,6 +897,44 @@ print(p.recvall(timeout=2).decode('utf-8'))
 
 pwn.college{IDRsQCNtNAuU13uh6pcriyIk5Mc.dlzNscTOxUzW}
 
+# 80
+# c file
+#include <stddef.h>
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <stddef.h>
+
+void pwncollege()
+{
+        //do stuff
+        int challenge_pid = fork();
+        if (challenge_pid == 0)
+        {
+		//131:gmxvqiehhz
+                //executing challenge
+     		char* newargv[] = { "/challenge/embryoio_level80", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", "gmxvqiehhz", NULL};
+                char* envp[] = { NULL };
+//		size_t n = sizeof(argv);
+//		printf("Size of argv: %d", n);
+                execve("/challenge/embryoio_level80", newargv, envp);
+        }
+        else
+        {
+        waitpid(challenge_pid, NULL, 0);
+        }
+
+}
+
+int main()
+{
+        pwncollege();
+
+}
+
+pwn.college{E1EeRDFRHTHB7LpT_oZoPRHlQTP.dBDOscTOxUzW}
+
+
 
 # 94 file descriptor 271, hard coded pass: biwxmjwz
 #c file
