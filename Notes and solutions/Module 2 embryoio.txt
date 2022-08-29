@@ -871,8 +871,20 @@ int main(int argc, char **argv)
 
 execve("/challenge/embryoio_level75", NULL, NULL);
 }
-
 pwn.college{sO_z2t_LCHIZzlNb8du-8tSwHXJ.dVzNscTOxUzW}
+
+# 77 
+#python file
+from pwn import *
+import os
+
+del os.environ['PWNLIB_NOTERM']
+print(os.environ)
+os.environ["280"] = "taibvbhsjx"
+p = process(['/challenge/embryoio_level77', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'hello', 'qrsywucjgx'])
+print(p.recvall(timeout=2).decode('utf-8'))
+
+pwn.college{UcsCWajmNtG8Iy88HaDOGjsoI70.ddzNscTOxUzW}
 
 # 94 file descriptor 271, hard coded pass: biwxmjwz
 #c file
@@ -935,7 +947,7 @@ stdout_write = os.open(fifo_stdout, os.O_WRONLY)
 
 p_stdin = process(["cat", "-"], stdout=stdin_write)
 p_stdout = process(["cat", "-"], stdin=stdout_read)
-p = process("/challenge/embryoio_level106", stdin=stdin_read, stdout=stdout_write)
+process("/challenge/embryoio_level106", stdin=stdin_read, stdout=stdout_write)
 
 print(p_stdout.recv().decode("utf-8"))
 p_stdin.sendline(b"100")
