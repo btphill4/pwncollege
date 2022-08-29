@@ -1176,10 +1176,11 @@ stdout_write = os.open(fifo_stdout, os.O_WRONLY)
 
 p_stdin = process(["cat", "-"], stdout=stdin_write)
 p_stdout = process(["cat", "-"], stdin=stdout_read)
-process("/challenge/embryoio_level106", stdin=stdin_read, stdout=stdout_write)
+p = process("/challenge/embryoio_level106", stdin=stdin_read, stdout=stdout_write)
 
 print(p_stdout.recv().decode("utf-8"))
-p_stdin.sendline(b"100")
+p_stdin.interactive()
+#p_stdin.sendline(b"3626")
 print(p_stdout.recv().decode("utf-8"))
 
 
@@ -1188,6 +1189,8 @@ os.close(stdin_read)
 os.close(stdin_write)
 os.close(stdout_read)
 os.close(stdout_write)
+pwn.college{MUjhNTdtNm8B1LyZQ6QAe83ZotR.QX2ATMscTOxUzW}
+
 
 from pwn import *
 
