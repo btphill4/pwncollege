@@ -1044,6 +1044,14 @@ pwn.college{AQa7hGpUPD8Wx5CH1hHuW8j7-Ir.dVDOscTOxUzW}
 pwn.college{MAxShN64ZK9mWggblEB8HMPwMXo.dZDOscTOxUzW}
 
 
+# 87
+# bash file
+#!/bin/bash
+/challenge/$HOSTNAME
+
+pwn.college{AVe6SMSvkt7EakljmZ-CTww-NJs.ddDOscTOxUzW}
+
+
 # 94 file descriptor 271, hard coded pass: biwxmjwz
 #c file
 int main(int argc, char const *argv[])
