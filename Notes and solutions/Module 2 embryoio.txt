@@ -1137,6 +1137,46 @@ p1.wait()
 
 pwn.college{QxP6S6j7eaQmdIoG0OSd6E3nGrq.QXyATMscTOxUzW}
 
+# 104
+from pwn import *
+import os
+
+fifo_stdin = "/tmp/fifo_stdin"
+fifo_stdout = "/tmp/fifo_stdout"
+
+try:
+    os.remove(fifo_stdin)
+    os.remove(fifo_stdout)
+except:
+    pass
+
+os.mkfifo(fifo_stdin, mode=0o777)
+os.mkfifo(fifo_stdout, mode=0o777)
+
+stdin_read = os.open(fifo_stdin, os.O_RDWR)
+stdin_write = os.open(fifo_stdin, os.O_WRONLY)
+stdout_read = os.open(fifo_stdout, os.O_RDWR)
+stdout_write = os.open(fifo_stdout, os.O_WRONLY)
+
+p_stdin = process(["cat", "-"], stdout=stdin_write)
+p_stdout = process(["cat", "-"], stdin=stdout_read)
+p = process("/challenge/embryoio_level105", stdin=stdin_read, stdout=stdout_write)
+
+print(p_stdout.recv().decode("utf-8"))
+p_stdin.interactive()
+#p_stdin.sendline(b"3626")
+print(p_stdout.recv().decode("utf-8"))
+
+
+
+os.close(stdin_read)
+os.close(stdin_write)
+os.close(stdout_read)
+os.close(stdout_write)
+
+pwn.college{8DvpFKmknAVqMJX8I3BO_HA-IC_.QX0ATMscTOxUzW}
+
+
 # 105
 # python file
 from pwn import *
