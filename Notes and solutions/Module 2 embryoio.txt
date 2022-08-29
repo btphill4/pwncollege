@@ -761,6 +761,11 @@ rev | ./a.out
 wwwejfen
 pwn.college{0ogSb5yWToZD59I057KVjRheFjW.dVjNscTOxUzW}
 
+# 66 
+find /challenge -type f -executable -name embryoio_level66 -exec /challenge/embryoio_level66 -c {} \
+pwn.college{oXIuslE-hUvFXkr33en3AdFnoA5.dZjNscTOxUzW}
+
+
 # 69
 #C file
 #include <unistd.h>
