@@ -1129,12 +1129,16 @@ print(p.recvall(timeout=2).decode('utf-8'))
 pwn.college{UCI2wfYhrsUmx3JZuJ5SKewRFM1.QXwATMscTOxUzW}
 
 #102
-#!/usr/bin/python3
 import subprocess
 ctf = "/challenge/embryoio_level102"
-argv0 = "whatever you want"
-p1 = subprocess.Popen([argv0], execuatable = ctf)
+argv0 = "irnwcp"
+p1 = subprocess.Popen([argv0], executable = ctf)
 p1.wait()
+
+pwn.college{QxP6S6j7eaQmdIoG0OSd6E3nGrq.QXyATMscTOxUzW}
+
+
+
 
 #FIFO PROBLEM
 from pwn import *
