@@ -834,22 +834,17 @@ cd /tmp/gjjuyu
 #creates subshell
 bash -c 'cd /tmp/gjjuyu; exec /challenge/$HOSTNAME'
 
-# 94 file descriptor 271, hard coded pass: biwxmjwz
-#c file
-int main(int argc, char const *argv[])
-{
-    //alternative dup2(open("/dev/tty", 0_RDWR), 116);
-	dup2(0, 271);
-	execve("/challenge/embryoio_level94", 0, 0);
-}
+$ 74 
+#python file
+import os
+from pwn import *
+import subprocess
+import sys
 
-#bash file
-#!/bin/bash
-./a.out
+p = process(['/challenge/embryoio_level74', 'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'hello',  'ftjcldjdsp'])
+print(p.recvall(timeout=2).decode('utf-8'))
 
-bash flag94.sh
-biwxmjwz
-pwn.college{sOyNUtJUCFvBczXWn89MnhnMKkP.dRTOscTOxUzW}
+pwn.college{EYPW0v6SBD070MSKRcSfaeB1Lek.dRzNscTOxUzW}
 
 
 # 75
@@ -879,7 +874,22 @@ execve("/challenge/embryoio_level75", NULL, NULL);
 
 pwn.college{sO_z2t_LCHIZzlNb8du-8tSwHXJ.dVzNscTOxUzW}
 
+# 94 file descriptor 271, hard coded pass: biwxmjwz
+#c file
+int main(int argc, char const *argv[])
+{
+    //alternative dup2(open("/dev/tty", 0_RDWR), 116);
+	dup2(0, 271);
+	execve("/challenge/embryoio_level94", 0, 0);
+}
 
+#bash file
+#!/bin/bash
+./a.out
+
+bash flag94.sh
+biwxmjwz
+pwn.college{sOyNUtJUCFvBczXWn89MnhnMKkP.dRTOscTOxUzW}
 
 #102
 #!/usr/bin/python3
