@@ -53,10 +53,44 @@ imul rdi, rsi
 add rdi, rdx
 mov rax, rdi 
 
-gcc -nostdlib -o solve.elf flag3_1.s
+gcc -nostdlib -o solve.elf flag3.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level3
 
 pwn.college{0BuIzCdny4yYsNe2QCLavfu-Cz8.QX2kTMscTOxUzW}
+
+# 4
+Recall division in x86 is more special than in normal math. Math in here is
+called integer math. This means everything, as it is now, is in the realm
+of whole looking numbers. As an example:
+10 / 3 = 3 in integer math. Why? Because 3.33 gets rounded down to an integer.
+The relevant instructions for this level are:
+mov rax, reg1; div reg2
+Notice: to use this instruction you need to first load rax with the desired register
+you intended to be the divided. Then run div reg2, where reg2 is the divisor. This
+results in:
+rax = rdi / rsi; rdx = remainder
+The quotient is placed in rax, the remainder is placed in rdx.
+Please compute the following:
+speed = distance / time, where:
+distance = rdi
+time = rsi
+Place the value of speed into rax given the above.
+We will now set the following in preparation for your code:
+rdi = 0xf0c
+rsi = 0x39
+
+# s file
+.intel_syntax noprefix
+mov rax, rdi
+div rsi
+
+gcc -nostdlib -o solve.elf flag4.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level4
+
+pwn.college{UjvcfEM-JjxR85a26amFPHHkJSp.QX3kTMscTOxUzW}
