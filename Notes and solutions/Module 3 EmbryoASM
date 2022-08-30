@@ -126,6 +126,7 @@ rsi = 0x3ff
 Please give me your assembly in bytes (up to 0x1000 bytes): 
 
 # s file
+.intel_syntax noprefix
 mov rax, rdi
 div rsi
 mov rax, rdx
@@ -137,3 +138,30 @@ objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level5
 
 pwn.college{kSsdSAyHcR7aUl2zyEVFvCrutkE.QX4kTMscTOxUzW}
+
+
+# 6 
+Using only the following instruction(s)
+mov
+Please compute the following:
+rax = rdi modulo 256
+rbx = rsi modulo 65536
+
+We will now set the following in preparation for your code:
+rdi = 0xfa2a
+rsi = 0x2a7d3fb
+
+# s file
+.intel_syntax noprefix
+mov rax, 0
+mov al, dil //mod 256
+mov rbx, 0
+mov bx, si
+
+gcc -nostdlib -o solve.elf flag6.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level6
+
+pwn.college{o95v336kEDZMr0oBLEK8lXpUyM4.QX5kTMscTOxUzW}
