@@ -1,0 +1,16 @@
+# ssh -i key hacker@dojo.pwn.college
+
+# open.s file
+
+# 1 
+#assembly .s file
+.intel_prefix nosyntax
+mov rdi, 0x1337
+
+gcc -nostdlib -o solve.elf flag1.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level1 
+
+pwn.college{US3o4ruH6EpBT6VAmM9Tr-W9enz.QX0kTMscTOxUzW}
