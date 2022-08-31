@@ -223,11 +223,36 @@ pwn.college{MYfyjR2k66GzgGktLrB4RXGVAJB.QXxAjMscTOxUzW}
 # 9
 # s file
 .intel_syntax noprefix
+.intel_syntax noprefix
+
+movabs rax, 0xdeadbeef00001337
+mov QWORD PTR [rdi], rax
+movabs rcx, 0xc0ffee0000
+mov QWORD PTR [rsi], rcx 
+
+
+gcc -nostdlib -o solve.elf flag12.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level12
+
+pwn.college{sesPBTbtE_NXAacMNEQClJ_wA6_.QX1AjMscTOxUzW}
+
+
+# 12
+
 
 
 # 14
 pop rax
-sub rax, rd
+sub rax, rdi
+
+gcc -nostdlib -o solve.elf flag14.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level14
 
 # 18
 .intel_syntax noprefix
@@ -340,6 +365,65 @@ objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level22
 
 pwn.college{AKT12FabZAUL5uN_Y8hRsZEug2j.QX1EjMscTOxUzW}
+
+# 23
+.intel_syntax noprefix
+
+push rbp
+mov rbp, rsp
+mov rcx, 0
+mov rax, 0
+jmp j1
+
+j1: 
+cmp rcx, rsi
+jge j2
+
+xor rdx, rdx
+mov rdx, rdi
+add edx, ecx
+
+mov al, BYTE PTR [rdx]
+mov rdx, rsp
+sub rdxm rax
+mov r12b, BYTE PTR [rdx]
+inc r12b
+mov BYTE PTR [rdx], r12b
+inc rcx
+jmp j1
+
+j2:
+mov rbx, 0
+mov rcx, 0
+mov rax, 0
+
+jmp j3
+
+j3:
+cmp rbx, 0xff
+jg done
+
+mov rdx, 0
+mov rdx, rbp
+sub rdx, rbx
+cmp BYTE PTR [rdx], cl
+jge j3
+
+mov cl, BYTE PTR [rdx]
+mov al, bl
+add bl, 1
+jmp j3
+
+done:
+mov rsp, rbp
+pop rbp
+ret
+
+gcc -nostdlib -o solve.elf flag23.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level23
 
 # python to assembly
 import pwn
