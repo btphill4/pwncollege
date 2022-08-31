@@ -234,7 +234,20 @@ cat solve.bin | /challenge/embryoasm_level9
 pwn.college{YMc2GWr9z2Rtj2FPAg8WP3MZ_pB.QXyAjMscTOxUzW}
 
 # 10
+# s file
+.intel_syntax noprefix
 
+mov rax, [0x404000]
+mov rdi, rax
+add rdi, 0x1337
+mov [0x404000], rdi
+
+gcc -nostdlib -o solve.elf flag10.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level10
+pwn.college{0uqUmf_O8GfuHLgGFpzoFchxzzG.QXzAjMscTOxUzW}
 
 # 11
 .intel_syntax noprefix
