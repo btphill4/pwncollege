@@ -264,6 +264,7 @@ objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level18
 
 cat solve.bin | /challenge/embryoasm_level18
+pwn.college{s3p9hWItO8RMT1iNbIKzctCSWWB.QXxEjMscTOxUzW}
 
 
 
