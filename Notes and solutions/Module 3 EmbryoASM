@@ -233,6 +233,24 @@ cat solve.bin | /challenge/embryoasm_level9
 
 pwn.college{YMc2GWr9z2Rtj2FPAg8WP3MZ_pB.QXyAjMscTOxUzW}
 
+# 10
+
+
+# 11
+.intel_syntax noprefix
+
+mov al, BYTE PTR [0x404000]
+mov bx, WORD PTR [0x404000]
+mov ecx, DWORD PTR [0x404000]
+mov rdx, QWORD PTR [0x404000]
+
+gcc -nostdlib -o solve.elf flag11.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level11
+
+pwn.college{MVKKbDB8bdWMU4Fmi63ZgAw29qD.QX0AjMscTOxUzW}
 
 # 12
 .intel_syntax noprefix
