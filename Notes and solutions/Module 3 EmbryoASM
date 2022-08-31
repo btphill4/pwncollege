@@ -223,6 +223,18 @@ pwn.college{MYfyjR2k66GzgGktLrB4RXGVAJB.QXxAjMscTOxUzW}
 # 9
 # s file
 .intel_syntax noprefix
+xor %rax, %rax
+
+gcc -nostdlib -o solve.elf flag9.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level9
+
+pwn.college{YMc2GWr9z2Rtj2FPAg8WP3MZ_pB.QXyAjMscTOxUzW}
+
+
+# 12
 .intel_syntax noprefix
 
 movabs rax, 0xdeadbeef00001337
@@ -238,10 +250,6 @@ objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level12
 
 pwn.college{sesPBTbtE_NXAacMNEQClJ_wA6_.QX1AjMscTOxUzW}
-
-
-# 12
-
 
 
 # 14
