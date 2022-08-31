@@ -221,7 +221,70 @@ cat solve.bin | /challenge/embryoasm_level8
 pwn.college{MYfyjR2k66GzgGktLrB4RXGVAJB.QXxAjMscTOxUzW}
 
 # 9
+# s file
+.intel_syntax noprefix
+
 
 # 14
 pop rax
 sub rax, rd
+
+# 18
+.intel_syntax noprefix
+
+cmp dword ptr[rdi], 0x7f454c46
+jne else_if
+if:
+	mov rax, 0
+	add eax, dword ptr [rdi + 4]
+	add eax, dword ptr [rdi + 8]
+	add eax, dword ptr [rdi + 12]
+	jmp post
+else_if:
+	cmp dword ptr [rdi], 0x00005A4D
+	jne else
+	mov eax, dword ptr [rdi + 4]
+	sub eax, dword ptr [rdi + 8]
+	sub eax, dword ptr [rdi + 12]
+	jmp post
+
+else:
+	mov rax, 1
+	mul dword ptr [rdi + 4]
+	mul dword ptr [rdi + 8]
+	mul dword ptr [rdi + 12]
+	jmp post
+post:
+	nop
+
+gcc -nostdlib -o solve.elf flag18.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level18
+
+cat solve.bin | /challenge/embryoasm_level18
+
+
+
+# python to assembly
+import pwn
+
+pwn.context.arch = "amd64"
+pwn.context.encoding = "latin-1"
+pwn.context.log_level = "INFO"
+pwn.warnings.simplefilter("ignore")
+assmebly = """
+
+mov rdi, 0x1337
+
+mov rax, SYS_exit
+syscall
+"""
+
+with pwn.process(f"/challenge/{pwn.os.getenv('HOSTNAME')}") as target:
+    pwn.info(target.readrepeat(1))
+
+    targ.send(pwn.asm(assmembly))
+    pwn.info(target.readrepeat(1))
+#print(pwn.asm(assembly))
