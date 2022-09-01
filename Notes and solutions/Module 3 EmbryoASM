@@ -282,6 +282,23 @@ cat solve.bin | /challenge/embryoasm_level12
 
 pwn.college{sesPBTbtE_NXAacMNEQClJ_wA6_.QX1AjMscTOxUzW}
 
+# 13
+# s
+.intel_syntax noprefix
+
+mov rdx, QWORD PTR [rdi + 0]
+mov rbx, QWORD PTR [rdi + 8]
+add rdx, rbx
+mov QWORD PTR [rsi], rdx
+
+
+gcc -nostdlib -o solve.elf flag13.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level13
+pwn.college{Q3yXcLNYpZc6ExHHsBAp03jx_KF.QX2AjMscTOxUzW}
+
 
 # 14
 pop rax
