@@ -293,6 +293,16 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level14
 
+# 17
+# s file
+.intel_syntax noprefix
+
+gcc -nostdlib -o solve.elf flag17_1.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level17
+
 # 18
 .intel_syntax noprefix
 
@@ -331,6 +341,22 @@ cat solve.bin | /challenge/embryoasm_level18
 pwn.college{s3p9hWItO8RMT1iNbIKzctCSWWB.QXxEjMscTOxUzW}
 
 
+# 19
+# s
+.intel_syntax noprefix
+cmp rdi, 3
+jg else
+jmp [rsi + rdi*8]
+else:
+	jmp [rsi + 0x20]
+
+
+gcc -nostdlib -o solve.elf flag19.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level19
+pwn.college{Q_wW_fcBoc2axpuT5WoJGDSN2fC.QXyEjMscTOxUzW}
 
 # 20
 .intel_syntax noprefix
@@ -463,6 +489,8 @@ gcc -nostdlib -o solve.elf flag23.s
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level23
+
+
 
 # python to assembly
 import pwn
