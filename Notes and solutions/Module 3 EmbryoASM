@@ -310,6 +310,26 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level14
 
+
+# 16
+# s
+.intel_syntax noprefix
+xor rax, rax
+add rax, [rsp]
+add rax, [rsp + 8]
+add rax, [rsp + 16]
+add rax, [rsp + 24]
+mov rbx, 4
+div rbx
+push rax
+
+gcc -nostdlib -o solve.elf flag16.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level16
+pwn.college{AIrxmX0Bru2Njo13r05nK0WbzBm.QX5AjMscTOxUzW}
+
 # 17
 # s file
 .intel_syntax noprefix
