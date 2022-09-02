@@ -415,7 +415,7 @@ mov r12, rsi
 loop:
         cmp rsi, 0
         je done
-        mov ebx, dword ptr [rdi]
+        mov ebx, DWORD PTR [rdi]
         add rax, rbx
         add rdi, 4
         dec rsi
