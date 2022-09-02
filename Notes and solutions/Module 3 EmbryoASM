@@ -301,6 +301,7 @@ pwn.college{Q3yXcLNYpZc6ExHHsBAp03jx_KF.QX2AjMscTOxUzW}
 
 
 # 14
+.intel_syntax noprefix
 pop rax
 sub rax, rdi
 
@@ -333,12 +334,24 @@ pwn.college{AIrxmX0Bru2Njo13r05nK0WbzBm.QX5AjMscTOxUzW}
 # 17
 # s file
 .intel_syntax noprefix
+jmp short j
+.rept 81
+nop
+.endr
+
+j:
+mov rdi, [rsp]
+mov r12, 0x403000
+jmp r12
+
 
 gcc -nostdlib -o solve.elf flag17_1.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level17
+
+pwn.college{g_KH95btCzFcNjLtXb9F-Ns23Ls.QXwEjMscTOxUzW}
 
 # 18
 .intel_syntax noprefix
