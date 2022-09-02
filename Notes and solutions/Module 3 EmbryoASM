@@ -345,7 +345,7 @@ mov r12, 0x403000
 jmp r12
 
 
-gcc -nostdlib -o solve.elf flag17_1.s
+gcc -nostdlib -o solve.elf flag17.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
@@ -540,6 +540,10 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level23
 
+
+# random asm info
+always set .intel_syntax noprefix
+xor rax, rax -> fully zeros out the register
 
 
 # python to assembly
