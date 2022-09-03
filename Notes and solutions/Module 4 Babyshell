@@ -169,7 +169,7 @@ pwn.college{wFFhDj-LQu_ObeVAAXX_G4tLeMm.QX3EjMscTOxUzW}
 .intel_syntax noprefix
 _start:
 
-    .rept 768
+    .rept 800
     nop
     .endr
     # open files
@@ -207,7 +207,10 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level2
 
-# 3
+pwn.college{ctuc6WBDiBbuJHYb9_Qee11fFzj.QX4EjMscTOxUzW}
+
+
+# 3 no null bytes -> 00
 .global _start
 .intel_syntax noprefix
 _start:
@@ -258,3 +261,24 @@ cat solve.bin | /challenge/babyshell_level3
 
 pwn.college{8vDVbOV8ZUKqYqz6PXzS0HrV3IS.QX5EjMscTOxUzW}
 
+# 4 no h bytes -> 48 close just need file reading
+# s file
+
+
+gcc -nostdlib -o solve.elf shell4.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level4
+
+
+# 5
+
+
+gcc -nostdlib -o solve.elf shell5.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level5
+
+# 8
