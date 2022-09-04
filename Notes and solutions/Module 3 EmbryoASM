@@ -277,14 +277,17 @@ pwn.college{Q3yXcLNYpZc6ExHHsBAp03jx_KF.QX2AjMscTOxUzW}
 
 # 14
 .intel_syntax noprefix
-pop rax
+pop rax 
 sub rax, rdi
+push rax
 
 gcc -nostdlib -o solve.elf flag14.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level14
+
+pwn.college{UPXUJASZjG-I8mfvfIwnY5kufE2.QX3AjMscTOxUzW}
 
 
 # 16
@@ -403,6 +406,25 @@ gcc -nostdlib -o solve.elf flag20.s
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level20
+
+
+
+
+# 21
+.global _start:
+.intel_syntax noprefix
+_start:
+xor rax, rax
+
+loop:
+cmp byte ptr [rdi], 0x0
+je done
+add rax, 1
+add rdi, 1
+jmp loop
+
+done:
+
 
 # 22
 .global _start
