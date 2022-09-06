@@ -290,6 +290,15 @@ cat solve.bin | /challenge/embryoasm_level14
 pwn.college{UPXUJASZjG-I8mfvfIwnY5kufE2.QX3AjMscTOxUzW}
 
 
+# 15
+
+
+gcc -nostdlib -o solve.elf flag15.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level15
+
 # 16
 # s
 .intel_syntax noprefix
@@ -388,14 +397,14 @@ pwn.college{Q_wW_fcBoc2axpuT5WoJGDSN2fC.QXyEjMscTOxUzW}
 
 # 20
 .intel_syntax noprefix
-mov rax, 0
+xor rax, rax
 mov r12, rsi
 loop:
         cmp rsi, 0
-        je done
-        mov ebx, DWORD PTR [rdi]
+        jge done
+        mov rax, DWORD PTR [rdi]
         add rax, rbx
-        add rdi, 4
+        add rdi, 8
         dec rsi
         jmp loop:
 done:
@@ -406,6 +415,29 @@ gcc -nostdlib -o solve.elf flag20.s
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level20
+
+# alt s file
+.intel_syntax noprefix
+mov rcx, 0
+mov rax, 0
+
+loop:
+cmp rcx, rsi
+jge end
+add rax, [rdi + rcx]
+inc rcx
+jmp loop
+
+end: 
+div rsi
+
+gcc -nostdlib -o solve.elf flag20_1.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level20
+
+
 
 
 
@@ -424,7 +456,13 @@ add rdi, 1
 jmp loop
 
 done:
+nop
 
+gcc -nostdlib -o solve.elf flag21.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/embryoasm_level21
 
 # 22
 .global _start
