@@ -521,59 +521,54 @@ pwn.college{AKT12FabZAUL5uN_Y8hRsZEug2j.QX1EjMscTOxUzW}
 
 push rbp
 mov rbp, rsp
-mov rcx, 0
+sub rsp, 256
+
+mov r13, 0
+
+loop:
+cmp r13, rsi
+je done
 mov rax, 0
-jmp j1
-
-j1: 
-cmp rcx, rsi
-jge j2
-
-xor rdx, rdx
-mov rdx, rdi
-add edx, ecx
-
-mov al, BYTE PTR [rdx]
-mov rdx, rsp
-sub rdxm rax
-mov r12b, BYTE PTR [rdx]
-inc r12b
-mov BYTE PTR [rdx], r12b
-inc rcx
-jmp j1
-
-j2:
-mov rbx, 0
-mov rcx, 0
-mov rax, 0
-
-jmp j3
-
-j3:
-cmp rbx, 0xff
-jg done
-
-mov rdx, 0
-mov rdx, rbp
-sub rdx, rbx
-cmp BYTE PTR [rdx], cl
-jge j3
-
-mov cl, BYTE PTR [rdx]
-mov al, bl
-add bl, 1
-jmp j3
+mov al, byte ptr [rdi+r13]
+mov rbx, rbp
+sub rbx, rax
+inc byte ptr [rbx]
+inc r13
+jmp loop
 
 done:
-mov rsp, rbp
-pop rbp
+mov r13, 0
+mov r14, 0
+mov r15, 0
+
+loop2:
+cmp r13, 256
+je done2
+mov rbx, rbp
+sub rbx, r13
+mov rax, 0
+mov al, byte ptr [rbx]
+cmp rax, r14
+jle not_greater
+mov r14, rax
+mov r15, r13
+not_greater:
+
+inc r13
+jmp loop2
+
+done2:
+mov rax, r15
+leave
 ret
 
-gcc -nostdlib -o solve.elf flag23.s
+gcc -nostdlib -o solve.elf flag23_1.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/embryoasm_level23
+
+pwn.college{kO-K5Tdq56k0ot_qtkp5rvlvXJj.QX2EjMscTOxUzW}
 
 
 # random asm info
