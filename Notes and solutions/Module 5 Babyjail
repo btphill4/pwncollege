@@ -388,9 +388,24 @@ pwn.college{ElO79ajCCiIYseYe-1YC4AaRDWW.QXxQjMscTOxUzW}
 # 12 can only read -> side channel of communication
 # try using time /challenge/babyjail_level12 /flag < solve.bin
 # check if bit is a 1 or 0 and do it again and again ... 
+# 11 uses nanosleep look at IPC -> time based attack
+
+
+==========================================================================================
+
+# 13
 
 
 
+==========================================================================================
+
+# 14
+
+vm connect
+
+cd old
+cat flag
+pwn.college{wVPM0J0hUNYtZXVYwh0BrWaHzai.01NwMzMscTOxUzW}
 
 
 
